@@ -58,11 +58,11 @@ if (urlAtual.startsWith(linkForm)) {
         //definindo icone
         let imgSource = ''
         if (titleQuestion.innerText.trim().startsWith("*")) {
-            imgSource = 'https://www.svgrepo.com/show/533052/star.svg'
+            imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
         } else if (titleQuestion.innerText.trim().startsWith("S2")) {
             imgSource = 'https://cdn.iconscout.com/icon/free/png-256/free-heart-1161-457786.png'
         } else {
-            imgSource = 'https://www.svgrepo.com/show/533052/star.svg'
+            imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
         }
 
         for (let j = 0; j < iconsLength; j++) {
@@ -111,6 +111,7 @@ if (urlAtual.startsWith(linkForm)) {
         field.addEventListener('input', () => {
             if (field.classList === zendeskFieldsFilter[indexQuestion].classList) {
                 zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
+                field.classList.remove('.delete-field')
             }
         })
     })
@@ -170,7 +171,7 @@ if (urlAtual.startsWith(linkForm)) {
 
     const fields = document.querySelectorAll('.form-field')
     fields.forEach((item) => {
-        item.classList.add('delete-field ')
+        item.classList.add('delete-field')
     })
     const formTitle = document.querySelector('.container h1')
     formTitle.innerHTML = 'Ajude-nos com sua opinião'
@@ -197,3 +198,16 @@ if (urlAtual.startsWith(linkForm)) {
     })
 
 }
+
+// //ocultando segundo formulário:
+// const url = 'https://con-bcrcx-fabio.zendesk.com/hc/pt-br/requests/new?ticket_form_id=23060614730779'
+// const segundaURL = window.location.href
+// if (segundaURL.startsWith(url)) {
+//     const fields = document.querySelectorAll('#new_request div:nth-child(n-1)')
+//     fields[0].classList.add('delete-field')
+//     fields[1].classList.add('delete-field')
+//     fields[2].classList.add('delete-field')
+//     fields[3].classList.add('delete-field')
+//     fields[4].classList.add('delete-field')
+//     fields[5].classList.add('delete-field')
+// }
