@@ -1,4 +1,9 @@
-.multilinha {
-    width: 100%;
-    height: 100%;
+@media screen and (min-width: 900px) {
+    .question-container{
+        margin-bottom: 0px;
+    }
+}
+
+.input-submit{
+    position: absolute;
 }

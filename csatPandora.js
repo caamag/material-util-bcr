@@ -96,11 +96,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
 
+        //preenchendo valores dos campos multilinha
+        const formZendeskFields = document.querySelectorAll('.form-field')
+        const zendeskFields = Array.from(formZendeskFields)
+        let zendeskFieldsFilter = zendeskFields.slice(4)
+        zendeskFieldsFilter.pop()
 
+        zendeskFieldsFilter.forEach((field) => {
+            const index = zendeskFieldsFilter.indexOf(field)
+            field.classList.add(`question${index}`)
+        })
 
+        const textAreaFields = document.querySelectorAll('.multilinha')
+        textAreaFields.forEach((field) => {
+            const questionClass = field.parentNode.classList[1]
+            const indexQuestion = questionClass[questionClass.length - 1]
+            
+            field.addEventListener('input', () => {
+                if (questionClass === zendeskFieldsFilter[indexQuestion].classList[4]) {
+                    zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
+                }
+            })
+        })
 
-
-
+        //preenchimento dos campos pelo clique dos icons
         const apiUrl = 'https://pandorabrasil.zendesk.com/api/v2/ticket_forms'
         const campos = [];
         async function getFields() {
@@ -135,5 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
             campos[questionIndex].value = selectedLengths[questionIndex];
         }
 
+        const btnSubmit = document.querySelector('#new_request input[type=submit]')
+        btnSubmit.classList.add('input-submit')
+        const fotter = document.querySelector('.new-footer')
+        fotter.style.marginTop = '100px'
+
     }
+
+    const fields = document.querySelectorAll('.form-field')
+    fields.forEach((item) => {
+        item.classList.add('delete-field')
+    })
 })
