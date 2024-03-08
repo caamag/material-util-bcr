@@ -4,6 +4,19 @@
     }
 }
 
-.input-submit{
-    position: absolute;
+.submit-btn{
+    margin-top: 150px;
+}
+
+
+.styled-number{
+    color: white;
+}
+
+.form-container{
+    margin: 0 auto;
+}
+
+.form-title{
+    text-align: center;
 }
