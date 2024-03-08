@@ -56,9 +56,9 @@ if (urlAtual.startsWith(linkForm)) {
             iconsLength = 5;
         }
 
-        let originalTitle = titleQuestion.innerText.trim();
+        let originalTitle = titleQuestion.innerText.trim()
         let imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png';
-        
+
         const regexStar = /\*/;
         if (originalTitle.startsWith("*")) {
             titleQuestion.innerHTML = originalTitle.replace(regexStar, '<span class="styled-term">*</span>');
@@ -66,20 +66,15 @@ if (urlAtual.startsWith(linkForm)) {
         }
 
         const regexNumber = /\((\d+)\)/;
-        const matchNumber = originalTitle.match(regexNumber);
+        const matchNumber = originalTitle.match(regexNumber)
         if (matchNumber) {
             titleQuestion.innerHTML = titleQuestion.innerHTML.replace(regexNumber, `<span class="styled-number">$&</span>`);
         }
-        
+
         const regexHeart = /S2/;
         if (originalTitle.startsWith("S2")) {
             titleQuestion.innerHTML = originalTitle.replace(regexHeart, '<span class="styled-term">S2</span>');
             imgSource = 'https://cdn.iconscout.com/icon/free/png-256/free-heart-1161-457786.png';
-        }
-        
-        const regexTXT = /\(TXT\)$/;
-        if (originalTitle.match(regexTXT)) {
-            titleQuestion.innerHTML = originalTitle.replace(regexTXT, '<span class="styled-txt">(TXT)</span>');
         }
 
 
