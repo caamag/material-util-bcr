@@ -216,3 +216,51 @@ if (urlAtual.startsWith(linkForm)) {
         })
     })
 }
+
+
+
+
+//formulário de NPS
+const NPSLink = 'https://pandorabrasil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=27017620445971';
+if (urlAtual.startsWith(NPSLink)) {
+
+    const form = document.querySelector('.request-form')
+    const questionLength = (form.length) - 9
+    const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label')
+    const selectedLengths = [0, 0, 0, 0];
+
+    for(let i=0;i<questionLength;i++) {
+
+        const question = document.createElement('div')
+        question.className = `question-container question${i}`;
+        const titleQuestion = document.createElement('h2')
+        titleQuestion.innerText = labels[i].innerText; 
+        question.appendChild(titleQuestion)
+
+        //icons
+        const icons = document.createElement('div');
+        icons.className = 'stars-content';
+        question.appendChild(icons);
+
+        form.appendChild(question)
+
+        const titleField = titleQuestion.innerText.trim()
+        const regexNPS = new RegExp("\\(" + "(NPS)" + "\\)")
+        const regexTXT = new RegExp("\\(" + "(TXT)" + "\\)")
+        let iconsLength = 0; 
+    
+        if (regexNPS.test(titleField)) {
+            iconsLength = 11;
+        }else if (regexTXT.test(titleField)){
+            iconsLength = 0;
+        }
+    
+        for (let icon = 0;icon < iconsLength;icon++) {
+    
+            const box = document.createElement('div')
+            box.classList.add('box')
+            icons.appendChild(box)
+    
+        }
+    }
+}
