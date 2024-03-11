@@ -3,14 +3,14 @@ const linkForm = 'https://pandorabrasil.zendesk.com/hc/pt-br/requests/new?ticket
 const urlAtual = window.location.href;
 
 if (urlAtual.startsWith(linkForm)) {
-    
+
     const form = document.querySelector('.request-form')
     const questionLength = (form.length) - 9
     const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label')
     const selectedLengths = [0, 0, 0, 0];
 
     for (let i = 0; i < questionLength; i++) {
-        
+
         const question = document.createElement('div');
         question.className = `question-container question${i}`;
         const titleQuestion = document.createElement('h2');
@@ -134,12 +134,12 @@ if (urlAtual.startsWith(linkForm)) {
     const textareaFields = document.querySelectorAll('.multilinha')
     textareaFields.forEach((field) => {
 
-        const classQuestion = field.parentNode.classList[1]; 
+        const classQuestion = field.parentNode.classList[1];
         const indexQuestion = classQuestion[classQuestion.length - 1]
-        
+
         field.addEventListener('input', () => {
             if (classQuestion === zendeskFieldsFilter[indexQuestion].classList[4]) {
-                zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value; 
+                zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value;
                 field.classList.remove('.delete-field')
             }
         })
@@ -161,7 +161,7 @@ if (urlAtual.startsWith(linkForm)) {
             }
         }
     }
-    getFields(); 
+    getFields();
 
     function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
@@ -184,7 +184,7 @@ if (urlAtual.startsWith(linkForm)) {
         item.classList.add('delete-field')
     })
 
-    const formContainer = document.querySelector('.form'); 
+    const formContainer = document.querySelector('.form');
     formContainer.classList.add('form-container');
 
     const formTitle = document.querySelector('.container h1')
@@ -194,10 +194,10 @@ if (urlAtual.startsWith(linkForm)) {
 }
 
 //envio de form com dados incompletos
-const emailField = document.querySelector('#request_anonymous_requester_email').value 
+const emailField = document.querySelector('#request_anonymous_requester_email').value
 const ticketIDField = document.querySelector('#request_custom_fields_27062271901843').value
 
-const customerUrl = `${linkForm}&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email=${emailField}&tf_27062271901843=${ticketIDField}`; 
+const customerUrl = `${linkForm}&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email=${emailField}&tf_27062271901843=${ticketIDField}`;
 
 if (urlAtual.startsWith(linkForm)) {
 
@@ -208,7 +208,7 @@ if (urlAtual.startsWith(linkForm)) {
         formInputs.forEach((input) => {
 
             if (input.value === '' && input.parentNode.classList.contains('required')) {
-                alert("Preencha o formulário completamente."); 
+                alert("Preencha o formulário completamente.");
                 setTimeout(() => {
                     window.location.assign(customerUrl)
                 }, 100)
@@ -216,8 +216,6 @@ if (urlAtual.startsWith(linkForm)) {
         })
     })
 }
-
-
 
 
 //formulário de NPS
@@ -229,17 +227,18 @@ if (urlAtual.startsWith(NPSLink)) {
     const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label')
     const selectedLengths = [0, 0, 0, 0];
 
-    for(let i=0;i<questionLength;i++) {
+    for (let i = 0; i < questionLength; i++) {
 
         const question = document.createElement('div')
         question.className = `question-container question${i}`;
         const titleQuestion = document.createElement('h2')
-        titleQuestion.innerText = labels[i].innerText; 
+        titleQuestion.innerText = labels[i].innerText;
         question.appendChild(titleQuestion)
 
         //icons
         const icons = document.createElement('div');
         icons.className = 'stars-content';
+        icons.classList.add('nps-icons')
         question.appendChild(icons);
 
         form.appendChild(question)
@@ -247,20 +246,158 @@ if (urlAtual.startsWith(NPSLink)) {
         const titleField = titleQuestion.innerText.trim()
         const regexNPS = new RegExp("\\(" + "(NPS)" + "\\)")
         const regexTXT = new RegExp("\\(" + "(TXT)" + "\\)")
-        let iconsLength = 0; 
-    
+        let iconsLength = 0;
+
         if (regexNPS.test(titleField)) {
             iconsLength = 11;
-        }else if (regexTXT.test(titleField)){
+            const textWithoutTagNPS = titleField.replace(regexNPS, `<span class='nps-tag'>$&</span>`)
+            titleQuestion.innerHTML = textWithoutTagNPS;
+        } else {
             iconsLength = 0;
         }
-    
-        for (let icon = 0;icon < iconsLength;icon++) {
-    
-            const box = document.createElement('div')
+
+        if (regexTXT.test(titleField)) {
+            const textWithoutTagTXT = titleField.replace(regexTXT, `<span class='nps-tag'>(TXT)</span>`)
+            titleQuestion.innerHTML = textWithoutTagTXT;
+        }
+
+        for (let icon = 0; icon < iconsLength; icon++) {
+            const box = document.createElement('div');
             box.classList.add('box')
+
+            box.addEventListener('click', () => { handleClick(box, icon, i) });
+
+            const boxIndex = document.createElement('p');
+            boxIndex.innerHTML = icon;
+            box.appendChild(boxIndex)
             icons.appendChild(box)
-    
+
+        }
+
+        //definindo campo multilinha
+        const h2Textearea = document.querySelectorAll('h2')
+
+        h2Textearea.forEach((txt) => {
+            if (regexTXT.test(txt.innerText)) {
+
+                const questionWithTextArea = txt.parentNode
+                const boxContent = questionWithTextArea.querySelectorAll('.stars-content')
+                boxContent.forEach((content) => {
+                    content.style.display = 'none';
+                })
+                const newTextarea = document.createElement('textarea')
+                newTextarea.classList.add('multilinha')
+                questionWithTextArea.appendChild(newTextarea)
+            }
+        })
+
+        const formZendeskFields = document.querySelectorAll('.form-field')
+        const zendeskFields = Array.from(formZendeskFields)
+        const zendeskfieldsFilter = zendeskFields.slice(5)
+        zendeskfieldsFilter.pop()
+
+        zendeskfieldsFilter.forEach((field) => {
+            const index = zendeskfieldsFilter.indexOf(field)
+            field.classList.add(`question${index}`)
+        })
+
+        const textareaFields = document.querySelectorAll('.multilinha');
+        textareaFields.forEach((field) => {
+            const classQuestion = field.parentNode.classList[1]
+            const indexQuestion = classQuestion[classQuestion.length - 1]
+
+            field.addEventListener('input', () => {
+                if (zendeskfieldsFilter[indexQuestion].classList[4] === classQuestion) {
+                    zendeskfieldsFilter[indexQuestion].querySelector('input').value = field.value;
+                    field.classList.remove('.delete-field')
+                }
+            })
+
+        })
+
+        if ((i + 1) === questionLength) {
+            const submitBtn = document.createElement('input')
+            submitBtn.setAttribute("type", "submit")
+            submitBtn.setAttribute("name", "commit")
+            submitBtn.setAttribute("value", "Enviar")
+            submitBtn.classList.add('submit-btn')
+
+            form.appendChild(submitBtn)
+        }
+
+    }
+
+    const apiUrl = 'https://pandorabrasil.zendesk.com/api/v2/ticket_forms'
+    const campos = [];
+    async function getFields() {
+        const res = await fetch(apiUrl)
+        const data = await res.json()
+        const IDs = data.ticket_forms[3].ticket_field_ids.slice(3)
+
+        for (let f = 0; f < IDs.length; f++) {
+            const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
+            if (el.classList.contains('string')) {
+                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} input`))
+            } else if (el.classList.contains('text')) {
+                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} textarea`))
+            }
         }
     }
+    getFields()
+
+    function handleClick(box, index, questionIndex) {
+        const allStars = box.parentNode.querySelectorAll('.box');
+
+        selectedLengths[questionIndex] = index;
+
+        for (let i = 0; i < allStars.length; i++) {
+            if (i <= index) {
+                allStars[i].classList.add('selected-box');
+            } else {
+                allStars[i].classList.remove('selected-box');
+            }
+        }
+
+        campos[questionIndex].value = selectedLengths[questionIndex];
+    }
+
+    const fields = document.querySelectorAll('.form-field')
+    fields.forEach((item) => {
+        item.classList.add('delete-field')
+    })
+
+    //removendo botão tradicional
+    const currentSubmitBtn = document.querySelector('#new_request footer')
+    currentSubmitBtn.style.display = 'none';
+
+    const formContainer = document.querySelector('.form');
+    formContainer.classList.add('form-container');
+
+    //editando título do form
+    const formTitle = document.querySelector('.container h1')
+    formTitle.classList.add('form-title')
+    formTitle.innerHTML = 'Avalie o nosso atendimento';
+}
+
+
+//envio de form com dados incompletos
+const customerUrlNPS = `${NPSLink}&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email=${emailField}&tf_27062271901843=${ticketIDField}`;
+
+if (urlAtual.startsWith(NPSLink)) {
+
+    const submitBtn = document.querySelector('.submit-btn')
+    submitBtn.addEventListener('click', () => {
+
+        const formInputs = document.querySelectorAll('.form-field input');
+        formInputs.forEach((input) => {
+
+            if (input.value === '' && input.parentNode.classList.contains('required')) {
+                alert("Preencha o formulário completamente.");
+                setTimeout(() => {
+                    window.location.assign(customerUrlNPS)
+                    window.location.reload()
+                }, 100)
+            }
+        })
+    })
 }
