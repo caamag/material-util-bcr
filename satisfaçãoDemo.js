@@ -35,7 +35,21 @@ if (urlAtual.startsWith(`${linkForm}/requests/new?ticket_form_id=(id do form NPS
             iconsLength = 5;
         }
 
-    }
+        let imgSource = 'link da imagem';
+        const regexStar = /\*/;
+        if (regexStar.startsWith("*")) {
+            imgSource = "link da imagem estrela"
+            titleQuestion.innerHTML = originalTitle.replace(regexStar, '<span class="styled-number">*</span>');
+        }
 
+        for (let j = 0; j < iconsLength; j++) {
+            const icon = document.createElement('img');
+            icon.src = imgSource;
+            icon.className = `star-icon icon${j}`;
+            icon.addEventListener('click', () => { handleClick(star, j, i); });
+            icons.appendChild(icon);
+        }
+
+    }
 }
 
