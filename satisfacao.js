@@ -1,15 +1,16 @@
-const linkForm = 'https://con-bcrcx-fabio.zendesk.com/hc/pt-br/requests/new?ticket_form_id=22597685887899';
+//pesquisa csat
+const linkForm = 'https://pandorabrasil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=27014006985235';
 const urlAtual = window.location.href;
 
 if (urlAtual.startsWith(linkForm)) {
-
-    const form = document.querySelector('.request-form');
-    const questionLength = (form.length) - 9;
-    const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label');
+    
+    const form = document.querySelector('.request-form')
+    const questionLength = (form.length) - 9
+    const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label')
     const selectedLengths = [0, 0, 0, 0];
 
-    //questions
     for (let i = 0; i < questionLength; i++) {
+      
         const question = document.createElement('div');
         question.className = `question-container question${i}`;
         const titleQuestion = document.createElement('h2');
@@ -32,6 +33,7 @@ if (urlAtual.startsWith(linkForm)) {
         const regex7 = new RegExp("\\(" + "(7)" + "\\)")
         const regex8 = new RegExp("\\(" + "(8)" + "\\)")
         const regex9 = new RegExp("\\(" + "(9)" + "\\)")
+        const regexText = /^.*\(TXT\).*$/
 
         if (regex1.test(titleField) || titleQuestion.innerText.trim().endsWith("(10)")) {
             iconsLength = 10;
@@ -54,15 +56,26 @@ if (urlAtual.startsWith(linkForm)) {
         } else {
             iconsLength = 5;
         }
+      
+      	let originalTitle = titleQuestion.innerText.trim();
+        let imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png';
 
-        //definindo icone
-        let imgSource = ''
-        if (titleQuestion.innerText.trim().startsWith("*")) {
-            imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
-        } else if (titleQuestion.innerText.trim().startsWith("S2")) {
-            imgSource = 'https://cdn.iconscout.com/icon/free/png-256/free-heart-1161-457786.png'
-        } else {
-            imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
+        const regexStar = /\*/;
+        if (originalTitle.startsWith("*")) {
+            titleQuestion.innerHTML = originalTitle.replace(regexStar, '<span class="styled-number">*</span>');
+            imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png';
+        }
+
+        const regexNumber = /\((\d+)\)/;
+        const matchNumber = originalTitle.match(regexNumber);
+        if (matchNumber) {
+            titleQuestion.innerHTML = titleQuestion.innerHTML.replace(regexNumber, `<span class="styled-number">$&</span>`);
+        }
+
+        const regexHeart = /S2/;
+        if (originalTitle.startsWith("S2")) {
+            titleQuestion.innerHTML = originalTitle.replace(regexHeart, '<span class="styled-number">S2</span>');
+            imgSource = 'https://cdn.iconscout.com/icon/free/png-256/free-heart-1161-457786.png';
         }
 
         for (let j = 0; j < iconsLength; j++) {
@@ -72,53 +85,65 @@ if (urlAtual.startsWith(linkForm)) {
             star.addEventListener('click', () => { handleClick(star, j, i); });
             stars.appendChild(star);
         }
+      
         form.appendChild(question);
-    }
 
-    //definindo se campo de texto/número ou multilinha
-    const regexText = /^.*\(TXT\).*$/
-    const h2Textearea = document.querySelectorAll('h2')
+        //criando botão de submit
+        if ((i + 1) === questionLength) {
+            const submitBtn = document.createElement('input')
+            submitBtn.setAttribute("type", "submit")
+            submitBtn.setAttribute("name", "commit")
+            submitBtn.setAttribute("value", "Enviar")
+            submitBtn.classList.add('submit-btn')
 
-    h2Textearea.forEach((txt) => {
-        if (regexText.test(txt.innerText)) {
-            const questionWithTextArea = txt.parentNode
-            const starContent = questionWithTextArea.querySelectorAll('.stars-content')
-            starContent.forEach((content) => {
-                content.style.display = 'none'
-            })
-            const newTextarea = document.createElement('textarea')
-            newTextarea.classList.add('multilinha')
-            questionWithTextArea.appendChild(newTextarea)
+            form.appendChild(submitBtn)
         }
-    })
 
-    //preenchendo campo de texto com valor de textarea
-    const formZendeskFields = document.querySelectorAll('.form-field')
-    const zendeskFields = Array.from(formZendeskFields)
-    let zendeskFieldsFilter = zendeskFields.slice(5)
-    zendeskFieldsFilter.pop()
+        //removendo botão tradicional
+        const currentSubmitBtn = document.querySelector('#new_request footer')
+        currentSubmitBtn.style.display = 'none'; 
+      
+        const h2Textearea = document.querySelectorAll('h2')
 
-    zendeskFieldsFilter.forEach((field) => {
-        const index = zendeskFieldsFilter.indexOf(field)
-        field.classList.add(`question${index}`)
-    })
-
-    const textareaFields = document.querySelectorAll('.multilinha')
-    textareaFields.forEach((field) => {
-        const classQuestion = field.parentNode.classList[1]
-        const indexQuestion = classQuestion[classQuestion.length - 1]
-
-        field.addEventListener('input', () => {
-            if (field.classList === zendeskFieldsFilter[indexQuestion].classList) {
-                zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
-                field.classList.remove('.delete-field')
+        h2Textearea.forEach((txt) => {
+            if (regexText.test(txt.innerText)) {
+                const questionWithTextArea = txt.parentNode
+                const starContent = questionWithTextArea.querySelectorAll('.stars-content')
+                starContent.forEach((content) => {
+                    content.style.display = 'none'
+                })
+                const newTextarea = document.createElement('textarea')
+                newTextarea.classList.add('multilinha')
+                questionWithTextArea.appendChild(newTextarea)
             }
         })
-    })
 
+        const formZendeskFields = document.querySelectorAll('.form-field')
+        const zendeskFields = Array.from(formZendeskFields)
+        let zendeskFieldsFilter = zendeskFields.slice(5)
+        zendeskFieldsFilter.pop()
 
+        zendeskFieldsFilter.forEach((field) => {
+            const index = zendeskFieldsFilter.indexOf(field)
+            field.classList.add(`question${index}`)
+        })
 
-    const apiUrl = 'https://con-bcrcx-fabio.zendesk.com/api/v2/ticket_forms'
+        const textareaFields = document.querySelectorAll('.multilinha')
+        textareaFields.forEach((field) => {
+
+            const classQuestion = field.parentNode.classList[1]; 
+            const indexQuestion = classQuestion[classQuestion.length - 1]
+
+            field.addEventListener('input', () => {
+                if (classQuestion === zendeskFieldsFilter[indexQuestion].classList[4]) {
+                    zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value; 
+                    field.classList.remove('.delete-field')
+                }
+            })
+        })
+    }
+  
+    const apiUrl = 'https://pandorabrasil.zendesk.com/api/v2/ticket_forms'
     const campos = [];
     async function getFields() {
         const res = await fetch(apiUrl)
@@ -135,8 +160,8 @@ if (urlAtual.startsWith(linkForm)) {
         }
     }
     getFields()
-
-    function handleClick(star, index, questionIndex) {
+  
+      function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
 
         selectedLengths[questionIndex] = index + 1;
@@ -151,63 +176,40 @@ if (urlAtual.startsWith(linkForm)) {
 
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
-}
-
-
-
-
-//ocultando campos, trocando título e prevenindo envio de form vazio
-const emailField = document.querySelector('#request_anonymous_requester_email').value
-const subjectField = document.querySelector('#request_subject').value
-const descriptionField = document.querySelector('#request_description').value
-const ticketIDField = document.querySelector('#request_custom_fields_22621760476571').value
-
-const encodedSubject = encodeURIComponent(subjectField)
-const encodedDescription = encodeURIComponent(descriptionField)
-
-const customerUrl = `${linkForm}&tf_subject=${encodedSubject}&tf_description=${encodedDescription}&tf_anonymous_requester_email=${emailField}&tf_22621760476571=${ticketIDField}`
-
-if (urlAtual.startsWith(linkForm)) {
-
+  
     const fields = document.querySelectorAll('.form-field')
     fields.forEach((item) => {
         item.classList.add('delete-field')
     })
+  
+    const formContainer = document.querySelector('.form'); 
+    formContainer.classList.add('form-container');
+  
     const formTitle = document.querySelector('.container h1')
-    formTitle.innerHTML = 'Ajude-nos com sua opinião'
+    formTitle.classList.add('form-title')
+    formTitle.innerHTML = 'Avalie o nosso atendimento'; 
 
-    const form = document.querySelector('.request-form')
-    form.addEventListener('submit', () => {
+    //envio de form com dados incompletos
+    const emailField = document.querySelector('#request_anonymous_requester_email').value
+    const ticketIDField = document.querySelector('#request_custom_fields_27062271901843').value
 
-        let empty = false
+    const customerUrl = `${linkForm}&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email=${emailField}&tf_27062271901843=${ticketIDField}`;
 
-        const fields = document.querySelectorAll('.form-field')
-        fields.forEach((input) => {
-            if (input.value === '' && !input.classList.contains('optional')) {
-                empty = true;
-            }
+    if (urlAtual.startsWith(linkForm)) {
+
+        const submitBtn = document.querySelector('.submit-btn')
+        submitBtn.addEventListener('click', () => {
+
+            const formInputs = document.querySelectorAll('.form-field input');
+            formInputs.forEach((input) => {
+
+                if (input.value === '' && input.parentNode.classList.contains('required')) {
+                    alert("Preencha o formulário completamente.");
+                    setTimeout(() => {
+                        window.location.assign(customerUrl)
+                    }, 100)
+                }
+            })
         })
-
-        if (empty) {
-            alert('Formulário não enviado! Favor preencher todos os campos.')
-            setTimeout(() => {
-                window.location.assign(customerUrl);
-            }, 100);
-
-        }
-    })
-
+    }
 }
-
-// //ocultando segundo formulário:
-// const url = 'https://con-bcrcx-fabio.zendesk.com/hc/pt-br/requests/new?ticket_form_id=23060614730779'
-// const segundaURL = window.location.href
-// if (segundaURL.startsWith(url)) {
-//     const fields = document.querySelectorAll('#new_request div:nth-child(n-1)')
-//     fields[0].classList.add('delete-field')
-//     fields[1].classList.add('delete-field')
-//     fields[2].classList.add('delete-field')
-//     fields[3].classList.add('delete-field')
-//     fields[4].classList.add('delete-field')
-//     fields[5].classList.add('delete-field')
-// }
