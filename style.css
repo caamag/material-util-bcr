@@ -60,3 +60,21 @@
 .nps-tag {
     color: white;
 }
+
+@media screen and (max-width: 450px) {
+    .hero{
+        background-image: url($assets-banner-principal-mobile-jpg);
+    }
+    .logo img{
+        filter: invert(100%);
+    }
+    .hero-content h1{
+        color: white;
+    }
+    .hero-content p{
+        color: white;
+    }
+    .icon-menu{
+        filter: invert(100%);
+    }
+}
