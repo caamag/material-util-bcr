@@ -60,13 +60,16 @@ if (urlAtual.startsWith(linkForm)) {
         if (titleQuestion.innerText.trim().startsWith("*")) {
             imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
         }else if (titleQuestion.innerText.trim().startsWith("S2")) {
-            imgSource = 'https://cdn.iconscout.com/icon/free/png-256/free-heart-1161-457786.png'
+            imgSource = 'https://theme.zdassets.com/theme_assets/16231370/056ce4f2e6c0f81faa386e099b61b87e34691c8b.png'
         }else{
             imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
         }
 
         if (regex1.test(titleField)) {
             stars.style.display = 'none';
+
+
+
             const npsIconsContainer = document.createElement('div'); 
             npsIconsContainer.classList.add('nps-icons-container');
 
