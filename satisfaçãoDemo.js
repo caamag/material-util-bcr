@@ -65,15 +65,29 @@ if (urlAtual.startsWith(linkForm)) {
             imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png'
         }
 
+        if (regex1.test(titleField)) {
+            stars.style.display = 'none';
+            const npsIconsContainer = document.createElement('div'); 
+            npsIconsContainer.classList.add('nps-icons-container');
+
+            for (let nps = 0;nps < 11; nps++) {
+                const npsIcon = document.createElement('div')
+                npsIcon.classList.add('nps-icon')
+                npsIcon.innerHTML = nps + 1;
+                npsIconsContainer.appendChild(npsIcon)
+                npsIcon.addEventListener('click', () => { handleClickNPS(npsIcon, nps - 1, i) });
+            }
+
+            titleQuestion.parentNode.appendChild(npsIconsContainer)
+        }
+
         for(let j = 0; j < iconsLength; j++){
             const star = document.createElement('img');
             star.src = imgSource; 
             star.className = `star-icon icon${j}`;
-            star.addEventListener('click', () => { handleClick(star, j, i); });
+            star.addEventListener('click', () => { handleClick(star, j, i) });
             stars.appendChild(star);
         }
-
-        
 
         form.appendChild(question);
 
@@ -149,15 +163,31 @@ if (urlAtual.startsWith(linkForm)) {
     getFields()
 
     function handleClick(star, index, questionIndex) {
-        const allStars = star.parentNode.querySelectorAll('.star-icon'); 
+        const allStars = star.parentNode.querySelectorAll('.star-icon');
 
-        selectedLengths[questionIndex] = index + 1; 
+        selectedLengths[questionIndex] = index + 1;
 
         for (let i = 0; i < allStars.length; i++) {
             if (i <= index) {
                 allStars[i].classList.add('selected');
             } else {
                 allStars[i].classList.remove('selected');
+            }
+        }
+
+        campos[questionIndex].value = selectedLengths[questionIndex];
+    }
+
+    function handleClickNPS(star, index, questionIndex) {
+        const allStars = star.parentNode.querySelectorAll('.nps-icon');
+
+        selectedLengths[questionIndex] = index;
+
+        for (let i = 0; i < allStars.length; i++) {
+            if (i <= index) {
+                allStars[i].classList.add('selected-nps');
+            } else {
+                allStars[i].classList.remove('selected-nps');
             }
         }
 

@@ -64,3 +64,46 @@
 .submit-btn{
     margin-top: 30px;
 }
+
+.nps-icons-container{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nps-icons-container > :nth-child(-n + 6){
+    background-color: rgb(251, 43, 20);
+}
+
+.nps-icons-container > :nth-child(7),
+.nps-icons-container > :nth-child(8){
+    background-color: rgb(251, 209, 20);
+}
+
+.nps-icons-container > :nth-child(9),
+.nps-icons-container > :nth-child(10){
+    background-color: rgb(43, 251, 20);
+}
+
+
+.nps-icon{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-left: 3px;
+    transition: 250ms;
+}
+
+.nps-icon:hover {
+    scale: 1.025;
+}
+
+.selected-nps{
+    border: 4px solid black;
+}
