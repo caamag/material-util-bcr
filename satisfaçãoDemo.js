@@ -49,7 +49,6 @@ if (urlAtual.startsWith(`${linkForm}/requests/new?ticket_form_id=(id do form NPS
             icon.addEventListener('click', () => { handleClick(star, j, i); });
             icons.appendChild(icon);
         }
-
     }
 }
 
