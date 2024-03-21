@@ -33,7 +33,7 @@ if (urlAtual.startsWith(linkForm)) {
         const regex8 = new RegExp("\\(" + "(8)" + "\\)")
         const regex9 = new RegExp("\\(" + "(9)" + "\\)")
 
-        if (regex1.test(titleField) || titleQuestion.innerText.trim().endsWith("(10)")){
+        if (titleQuestion.innerText.trim().endsWith("(10)")){
             iconsLength = 10; 
         }else if(regex2.test(titleField)) {
             iconsLength = 2; 
@@ -72,7 +72,21 @@ if (urlAtual.startsWith(linkForm)) {
             star.addEventListener('click', () => { handleClick(star, j, i); });
             stars.appendChild(star);
         }
+
+        
+
         form.appendChild(question);
+
+        //criando botão de enviar
+        if ((i + 1) === questionLength) {
+            const submitBtn = document.createElement('input'); 
+            submitBtn.setAttribute('type', 'submit'); 
+            submitBtn.setAttribute('name', 'commit')
+            submitBtn.setAttribute('value', "Enviar avaliação")
+            submitBtn.classList.add('submit-btn')
+            submitBtn.style.display = 'block';
+            form.appendChild(submitBtn)
+        }
     }
   
   	//definindo se campo de texto/número ou multilinha
@@ -109,14 +123,12 @@ if (urlAtual.startsWith(linkForm)) {
         const indexQuestion = classQuestion[classQuestion.length -1]
 
         field.addEventListener('input', () => {
-            if (field.classList === zendeskFieldsFilter[indexQuestion].classList) {
+            if (field.parentNode.classList[1] === zendeskFieldsFilter[indexQuestion].classList[4]) {
                 zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
                 field.classList.remove('.delete-field')
             }
         })
     })
-
-
 
     const apiUrl = 'https://con-bcrcx-fabio.zendesk.com/api/v2/ticket_forms'
     const campos = [];
