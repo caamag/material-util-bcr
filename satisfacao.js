@@ -3,14 +3,14 @@ const linkForm = 'https://pandorabrasil.zendesk.com/hc/pt-br/requests/new?ticket
 const urlAtual = window.location.href;
 
 if (urlAtual.startsWith(linkForm)) {
-    
+
     const form = document.querySelector('.request-form')
     const questionLength = (form.length) - 9
     const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label')
     const selectedLengths = [0, 0, 0, 0];
 
     for (let i = 0; i < questionLength; i++) {
-      
+
         const question = document.createElement('div');
         question.className = `question-container question${i}`;
         const titleQuestion = document.createElement('h2');
@@ -56,8 +56,8 @@ if (urlAtual.startsWith(linkForm)) {
         } else {
             iconsLength = 5;
         }
-      
-      	let originalTitle = titleQuestion.innerText.trim();
+
+        let originalTitle = titleQuestion.innerText.trim();
         let imgSource = 'https://theme.zdassets.com/theme_assets/16231370/76e11baadb52ef6e072544b46625aee03d6c69eb.png';
 
         const regexStar = /\*/;
@@ -85,7 +85,7 @@ if (urlAtual.startsWith(linkForm)) {
             star.addEventListener('click', () => { handleClick(star, j, i); });
             stars.appendChild(star);
         }
-      
+
         form.appendChild(question);
 
         //criando botão de submit
@@ -101,8 +101,8 @@ if (urlAtual.startsWith(linkForm)) {
 
         //removendo botão tradicional
         const currentSubmitBtn = document.querySelector('#new_request footer')
-        currentSubmitBtn.style.display = 'none'; 
-      
+        currentSubmitBtn.style.display = 'none';
+
         const h2Textearea = document.querySelectorAll('h2')
 
         h2Textearea.forEach((txt) => {
@@ -131,24 +131,25 @@ if (urlAtual.startsWith(linkForm)) {
         const textareaFields = document.querySelectorAll('.multilinha')
         textareaFields.forEach((field) => {
 
-            const classQuestion = field.parentNode.classList[1]; 
+            const classQuestion = field.parentNode.classList[1];
             const indexQuestion = classQuestion[classQuestion.length - 1]
 
             field.addEventListener('input', () => {
                 if (classQuestion === zendeskFieldsFilter[indexQuestion].classList[4]) {
-                    zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value; 
+                    zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value;
                     field.classList.remove('.delete-field')
                 }
             })
         })
     }
-  
+
     const apiUrl = 'https://pandorabrasil.zendesk.com/api/v2/ticket_forms'
     const campos = [];
     async function getFields() {
         const res = await fetch(apiUrl)
         const data = await res.json()
-        const IDs = data.ticket_forms[2].ticket_field_ids.slice(3)
+        const csatForm = data.ticket_forms.filter(form => form.name === 'Pesquisa de NPS')
+        const IDs = csatForm[0].ticket_field_ids.slice(3)
 
         for (let f = 0; f < IDs.length; f++) {
             const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
@@ -160,8 +161,8 @@ if (urlAtual.startsWith(linkForm)) {
         }
     }
     getFields()
-  
-      function handleClick(star, index, questionIndex) {
+
+    function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
 
         selectedLengths[questionIndex] = index + 1;
@@ -176,18 +177,18 @@ if (urlAtual.startsWith(linkForm)) {
 
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
-  
+
     const fields = document.querySelectorAll('.form-field')
     fields.forEach((item) => {
         item.classList.add('delete-field')
     })
-  
-    const formContainer = document.querySelector('.form'); 
+
+    const formContainer = document.querySelector('.form');
     formContainer.classList.add('form-container');
-  
+
     const formTitle = document.querySelector('.container h1')
     formTitle.classList.add('form-title')
-    formTitle.innerHTML = 'Avalie o nosso atendimento'; 
+    formTitle.innerHTML = 'Avalie o nosso atendimento';
 
     //envio de form com dados incompletos
     const emailField = document.querySelector('#request_anonymous_requester_email').value

@@ -18,3 +18,12 @@
 //     fields[5].classList.add('delete-field')
 
 // }
+
+
+async function getFormCsat() {
+    const res = await fetch('/api/v2/ticket_forms');
+    const data = await res.json();
+    console.log(data);
+}
+
+getFormCsat();
