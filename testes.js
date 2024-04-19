@@ -1,31 +1,26 @@
-// const anexo = document.querySelector('.upload-dropzone')
-// anexo.style.border = '1px solid yellow'
-// const label = anexo.parentNode.querySelector('label')
-// label.innerHTML = 'Anexo';
+//formulário para tickets não atendidos
+const campo1 = document.querySelector('.request_custom_fields_24962896919323');
+const checkBox1 = document.querySelector('#request_custom_fields_24962896919323')
+checkBox1.classList.add('checkbox')
+const button1 = document.createElement('button');
+button1.classList.add('btn-new-ticket-form')
+button1.innerHTML = campo1.querySelector('label').innerText;
+campo1.appendChild(button1)
 
+//img
+const img1 = document.createElement('img');
+img1.src = 'https://theme.zdassets.com/theme_assets/15904219/f89a8313fd36509ef929c8b2f7c6bdf936321ec0.png'
+button1.firstChild(img1)
 
-
-// //ocultadno segundo formulário:
-// const url = 'https://con-bcrcx-fabio.zendesk.com/hc/pt-br/requests/new?ticket_form_id=23060614730779'
-// const segundaURL = window.location.href
-// if (segundaURL.startsWith(url)) {
-
-//     const fields = document.querySelectorAll('#new_request div:nth-child(n-1)')
-//     fields[1].classList.add('delete-field')
-//     fields[2].classList.add('delete-field')
-//     fields[3].classList.add('delete-field')
-//     fields[4].classList.add('delete-field')
-//     fields[5].classList.add('delete-field')
-
-// }
-
-async function getForm() {
-    const res = await fetch('/api/v2/ticket_forms')
-    const data = await res.json();
-    const forms = data.ticket_forms;
-    const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
-    const IDs = csatForm[0].ticket_field_ids.slice(6);
-    console.log(IDs);
-}
-
-getForm()
+button1.addEventListener('click', (e) => {
+    e.preventDefault()
+    if (checkBox1.checked) {
+        checkBox1.checked = false
+        button1.classList.remove('btn-checked')
+        button1.innerHTML = 'Marcar'
+    } else {
+        checkBox1.checked = true
+        button1.classList.add('btn-checked')
+        button1.innerHTML = 'Desmarcar'
+    }
+})
