@@ -1,26 +1,69 @@
-//formulário para tickets não atendidos
-const campo1 = document.querySelector('.request_custom_fields_24962896919323');
-const checkBox1 = document.querySelector('#request_custom_fields_24962896919323')
-checkBox1.classList.add('checkbox')
-const button1 = document.createElement('button');
-button1.classList.add('btn-new-ticket-form')
-button1.innerHTML = campo1.querySelector('label').innerText;
-campo1.appendChild(button1)
+const campo4 = document.querySelector('.request_custom_fields_24963698304667');
+const checkBox4 = document.querySelector('#request_custom_fields_24963698304667');
+checkBox4.classList.add('checkbox')
+const button4 = document.createElement('div');
+button4.classList.add('btn-new-ticket-form');
+button4.innerHTML = campo4.querySelector('label').innerText;
+campo4.appendChild(button4)
 
-//img
-const img1 = document.createElement('img');
-img1.src = 'https://theme.zdassets.com/theme_assets/15904219/f89a8313fd36509ef929c8b2f7c6bdf936321ec0.png'
-button1.firstChild(img1)
+const dynamicCheckContainer = document.createElement('div');
+dynamicCheckContainer.classList.add('dynamic-check-container');
+button4.appendChild(dynamicCheckContainer)
 
-button1.addEventListener('click', (e) => {
-    e.preventDefault()
-    if (checkBox1.checked) {
-        checkBox1.checked = false
-        button1.classList.remove('btn-checked')
-        button1.innerHTML = 'Marcar'
+const dynamicCheck = document.createElement('div')
+dynamicCheck.classList.add('dynamic-check')
+dynamicCheckContainer.appendChild(dynamicCheck)
+
+dynamicCheckContainer.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    //checking the checkbox questions
+    if (checkBox4.checked) {
+        checkBox4.checked = false
     } else {
-        checkBox1.checked = true
-        button1.classList.add('btn-checked')
-        button1.innerHTML = 'Desmarcar'
+        checkBox4.checked = true
+    }
+
+    //change a dynamic checkbox
+    if (dynamicCheck.classList.contains('dynamic-check-checked')) {
+        dynamicCheck.classList.remove('dynamic-check-checked');
+        dynamicCheckContainer.style.backgroundColor = 'white';
+    } else {
+        dynamicCheck.classList.add('dynamic-check-checked');
+        dynamicCheckContainer.style.backgroundColor = 'black';
+    }
+});
+
+
+if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=24847865198491')) {
+    const label = document.querySelector('.container')
+        .querySelector('h1')
+        .innerHTML = 'Por que considera ainda não finalizada a sua solicitação?'
+};
+
+
+const regexText = new RegExp("\\(" + "(TXT)" + "\\)")
+const h2Textearea = document.querySelectorAll('h1');
+
+h2Textearea.forEach(text => {
+    if (regexText.test(text.innerText)) {
+        const questionWithTextArea = text.parentNode;
+        questionWithTextArea.style.flexDirection = 'column';
+        questionWithTextArea.style.alignItems = 'flex-start'
+        questionWithTextArea.style.height = '150px';
+        const iconContent = questionWithTextArea.querySelectorAll('.icon-content');
+
+        if (regexText.test(title)) {
+            const textWithoutTag = title.replace(regexText, `<span class='nps-tag'>$&</span>`);
+            titleQuestion.innerHTML = textWithoutTag;
+        }
+
+        iconContent.forEach(content => {
+            content.style.display = 'none';
+        })
+        const newTextarea = document.createElement('textarea');
+        newTextarea.classList.add('multilinha')
+        questionWithTextArea.appendChild(newTextarea)
     }
 })
+

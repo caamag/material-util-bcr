@@ -60,3 +60,40 @@
 .btn-checked img {
     filter: invert(100%);
 }
+
+.request_custom_fields_24963698304667 .btn-new-ticket-form {
+    background-color: white;
+}
+
+.request_custom_fields_24963698304667 .btn-new-ticket-form:hover {
+    color: black;
+    cursor: auto;
+}
+
+
+
+.dynamic-check-container {
+    width: 100px;
+    height: 30px;
+    margin-right: 30px;
+    border-radius: 100px;
+    border: solid 1px black;
+    cursor: pointer;
+}
+
+.dynamic-check {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(0, 113, 189);
+    border-radius: 100%;
+    transition: 250px;
+}
+
+.dynamic-check-checked {
+    margin-left: 34px;
+}
+
+.question5 h1 {
+    text-align: left;
+    align-items: flex-start;
+}
