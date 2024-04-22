@@ -8,8 +8,8 @@ if (currentURL.startsWith(linkForm)) {
     formTitle.innerHTML = 'Pesquisa de satisfação';
 
     const form = document.querySelector('.request-form')
-    const formLength = (form.length) - 9;
-    const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label');
+    const formLength = (form.length) - 7;
+    const labels = document.querySelectorAll('#new_request div:nth-child(n+6) label');
     const selectedLengths = [0, 0, 0, 0];
 
     for (let i = 0; i < formLength; i++) {
@@ -89,7 +89,7 @@ if (currentURL.startsWith(linkForm)) {
     //preenchendo conteúdo do campo de texto
     const formZendeskFields = document.querySelectorAll('.form-field');
     const zendeskFields = Array.from(formZendeskFields);
-    let zendeskFieldsFilter = zendeskFields.slice(5);
+    let zendeskFieldsFilter = zendeskFields.slice(3);
     zendeskFieldsFilter.pop();
 
     zendeskFieldsFilter.forEach(field => {
@@ -153,4 +153,107 @@ if (currentURL.startsWith(linkForm)) {
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
+}
+
+
+//form solicitação não atendida
+if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=24847865198491')) {
+
+    const formSelect = document.querySelector('.request_ticket_form_id');
+    formSelect.style.display = 'none';
+    const ccEmail = document.querySelector('.request_cc_emails');
+    ccEmail.style.display = 'none';
+    const requestSubject = document.querySelector('.request_subject');
+    requestSubject.style.display = 'none';
+    const requestDescription = document.querySelector('.request_description');
+    requestDescription.style.display = 'none';
+
+    const question1 = document.querySelector('.request_custom_fields_24962896919323');
+    const checkContainer1 = document.createElement('div');
+    question1.appendChild(checkContainer1)
+    checkContainer1.classList.add('check-container');
+    checkContainer1.innerHTML = question1.querySelector('label').innerText;
+
+    const img1 = document.createElement('img');
+    img1.classList.add('img-checkbox')
+    img1.src = 'https://theme.zdassets.com/theme_assets/15904219/daba3d7c076f9ea31446f15056fd53fd890105a5.png';
+    checkContainer1.appendChild(img1);
+
+    checkContainer1.addEventListener('click', () => {
+        const checkbox = document.querySelector('#request_custom_fields_24962896919323');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+            checkContainer1.classList.add('checked')
+        } else {
+            checkContainer1.classList.remove('checked')
+        }
+    })
+
+    const question2 = document.querySelector('.request_custom_fields_24962889637019');
+    const checkContainer2 = document.createElement('div');
+    question2.appendChild(checkContainer2)
+    checkContainer2.classList.add('check-container');
+    checkContainer2.innerHTML = question2.querySelector('label').innerText;
+
+    const img2 = document.createElement('img');
+    img2.classList.add('img-checkbox')
+    img2.src = 'https://theme.zdassets.com/theme_assets/15904219/2a9213d5902633b7dcbac76be4b4703c0187804a.png';
+    checkContainer2.appendChild(img2);
+
+    checkContainer2.addEventListener('click', () => {
+        const checkbox = document.querySelector('#request_custom_fields_24962889637019');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+            checkContainer2.classList.add('checked')
+        } else {
+            checkContainer2.classList.remove('checked')
+        }
+    })
+
+    const question3 = document.querySelector('.request_custom_fields_24962908572315');
+    const checkContainer3 = document.createElement('div');
+    question3.appendChild(checkContainer3)
+    checkContainer3.classList.add('check-container');
+    checkContainer3.innerHTML = question3.querySelector('label').innerText;
+
+    const img3 = document.createElement('img');
+    img3.classList.add('img-checkbox')
+    img3.src = 'https://theme.zdassets.com/theme_assets/15904219/2b267f43ba225e4d3f492200a9364fe42060e7a5.png';
+    checkContainer3.appendChild(img3);
+
+    checkContainer3.addEventListener('click', () => {
+        const checkbox = document.querySelector('#request_custom_fields_24962908572315');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+            checkContainer3.classList.add('checked')
+        } else {
+            checkContainer3.classList.remove('checked')
+        }
+    })
+
+    const question4 = document.querySelector('.request_custom_fields_24963698304667')
+    const dynamicContainer = document.createElement('div');
+    dynamicContainer.classList.add('dynamic-container');
+    const dynamicBTN = document.createElement('div')
+    dynamicBTN.classList.add('dynamic-btn')
+    dynamicContainer.appendChild(dynamicBTN)
+    question4.appendChild(dynamicContainer)
+
+    const dynamicTitle = document.querySelector('#.request_custom_fields_2496369830466 label')
+    dynamicTitle.innerHTML = 'Gostaria de manter a sua solicitação aberta e continuar com o atendimento?'
+
+    dynamicContainer.addEventListener('click', () => {
+        const checkbox = document.querySelector('#request_custom_fields_24963698304667');
+        checkbox.checked = !checkbox.checked;
+        if (checkbox.checked) {
+            dynamicContainer.classList.add('dynamic-checked');
+            dynamicBTN.style.marginLeft = '30px'
+        } else {
+            dynamicContainer.classList.remove('dynamic-checked')
+            dynamicBTN.style.marginLeft = '0px'
+        }
+    })
 }
