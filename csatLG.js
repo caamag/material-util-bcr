@@ -70,6 +70,9 @@ if (currentURL.startsWith(linkForm)) {
     h2Textearea.forEach(text => {
         if (regexText.test(text.innerText)) {
             const questionWithTextArea = text.parentNode;
+            questionWithTextArea.style.flexDirection = 'column';
+            questionWithTextArea.style.marginBottom = '30px';
+            questionWithTextArea.style.alignItems = 'start';
             const iconContent = questionWithTextArea.querySelectorAll('.icon-content');
 
             if (regexText.test(title)) {
@@ -231,6 +234,23 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
             checkContainer3.classList.add('checked')
         } else {
             checkContainer3.classList.remove('checked')
+        }
+    })
+
+    const question5 = document.querySelector('.request_custom_fields_25139221997339')
+    const checkContainer5 = document.createElement('div')
+    question5.appendChild(checkContainer5)
+    checkContainer5.classList.add('check-container');
+    checkContainer5.innerHTML = question5.querySelector('label').innerText.replace('(opcional)', '')
+
+    checkContainer5.addEventListener('click', () => {
+        const checkbox = document.querySelector('#request_custom_fields_25139221997339');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+            checkContainer5.classList.add('checked')
+        }else{
+            checkContainer5.classList.remove('checked')
         }
     })
 
