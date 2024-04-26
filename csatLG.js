@@ -130,7 +130,7 @@ if (currentURL.startsWith(linkForm)) {
         const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
 
         let sliceNumber = 6;
-        if (csatForm[0].ticket_field_ids < 12) {
+        if (csatForm[0].ticket_field_ids.length < 12) {
             sliceNumber = 2;
         }
 
@@ -223,23 +223,6 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
             checkContainer3.classList.add('checked')
         } else {
             checkContainer3.classList.remove('checked')
-        }
-    })
-
-    const question5 = document.querySelector('.request_custom_fields_25139221997339')
-    const checkContainer5 = document.createElement('div')
-    question5.appendChild(checkContainer5)
-    checkContainer5.classList.add('check-container');
-    checkContainer5.innerHTML = question5.querySelector('label').innerText.replace('(opcional)', '')
-
-    checkContainer5.addEventListener('click', () => {
-        const checkbox = document.querySelector('#request_custom_fields_25139221997339');
-        checkbox.checked = !checkbox.checked;
-
-        if (checkbox.checked) {
-            checkContainer5.classList.add('checked')
-        }else{
-            checkContainer5.classList.remove('checked')
         }
     })
 
