@@ -68,8 +68,6 @@ if (urlAtual.startsWith(linkForm)) {
         if (regex1.test(titleField)) {
             stars.style.display = 'none';
 
-
-
             const npsIconsContainer = document.createElement('div'); 
             npsIconsContainer.classList.add('nps-icons-container');
 
@@ -112,6 +110,9 @@ if (urlAtual.startsWith(linkForm)) {
     
     h2Textearea.forEach((txt) => {
         if (regexText.test(txt.innerText)) {
+
+            
+
             const questionWithTextArea = txt.parentNode
             const starContent = questionWithTextArea.querySelectorAll('.stars-content')
             starContent.forEach((content) => {
