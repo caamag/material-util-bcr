@@ -169,7 +169,7 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
     const formSelect = document.querySelector('.request_ticket_form_id');
     formSelect.style.display = 'none';
     const ccEmail = document.querySelector('.request_cc_emails');
-    ccEmail.style.display = 'none';
+    if (ccEmail) ccEmail.style.display = 'none'
     const requestSubject = document.querySelector('.request_subject');
     requestSubject.style.display = 'none';
     const requestDescription = document.querySelector('.request_description');
