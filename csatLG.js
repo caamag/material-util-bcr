@@ -8,8 +8,8 @@ if (currentURL.startsWith(linkForm)) {
     formTitle.innerHTML = 'Pesquisa de satisfação';
 
     const form = document.querySelector('.request-form')
-    const formLength = (form.length) - 7;
-    const labels = document.querySelectorAll('#new_request div:nth-child(n+6) label');
+    const formLength = (form.length) - 8;
+    const labels = document.querySelectorAll('#new_request div:nth-child(n+7) label');
     const selectedLengths = [0, 0, 0, 0];
 
     for (let i = 0; i < formLength; i++) {
@@ -70,6 +70,9 @@ if (currentURL.startsWith(linkForm)) {
     h2Textearea.forEach(text => {
         if (regexText.test(text.innerText)) {
             const questionWithTextArea = text.parentNode;
+            questionWithTextArea.style.flexDirection = 'column';
+            questionWithTextArea.style.marginBottom = '30px';
+            questionWithTextArea.style.alignItems = 'start';
             const iconContent = questionWithTextArea.querySelectorAll('.icon-content');
 
             if (regexText.test(title)) {
@@ -89,7 +92,7 @@ if (currentURL.startsWith(linkForm)) {
     //preenchendo conteúdo do campo de texto
     const formZendeskFields = document.querySelectorAll('.form-field');
     const zendeskFields = Array.from(formZendeskFields);
-    let zendeskFieldsFilter = zendeskFields.slice(3);
+    let zendeskFieldsFilter = zendeskFields.slice(4);
     zendeskFieldsFilter.pop();
 
     zendeskFieldsFilter.forEach(field => {
@@ -125,7 +128,13 @@ if (currentURL.startsWith(linkForm)) {
         const data = await res.json()
         const forms = data.ticket_forms;
         const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
-        const IDs = csatForm[0].ticket_field_ids.slice(6);
+
+        let sliceNumber = 6;
+        if (csatForm[0].ticket_field_ids < 12) {
+            sliceNumber = 2;
+        }
+
+        const IDs = csatForm[0].ticket_field_ids.slice(sliceNumber);
 
         for (let f = 0; f < IDs.length; f++) {
             const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
@@ -137,7 +146,6 @@ if (currentURL.startsWith(linkForm)) {
         }
     }
     getFields()
-
 
     function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
@@ -153,8 +161,7 @@ if (currentURL.startsWith(linkForm)) {
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
-}
-
+};
 
 //form solicitação não atendida
 if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=24847865198491')) {
@@ -172,12 +179,7 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
     const checkContainer1 = document.createElement('div');
     question1.appendChild(checkContainer1)
     checkContainer1.classList.add('check-container');
-    checkContainer1.innerHTML = question1.querySelector('label').innerText;
-
-    const img1 = document.createElement('img');
-    img1.classList.add('img-checkbox')
-    img1.src = 'https://theme.zdassets.com/theme_assets/15904219/daba3d7c076f9ea31446f15056fd53fd890105a5.png';
-    checkContainer1.appendChild(img1);
+    checkContainer1.innerHTML = question1.querySelector('label').innerText.replace('(opcional)', '')
 
     checkContainer1.addEventListener('click', () => {
         const checkbox = document.querySelector('#request_custom_fields_24962896919323');
@@ -194,12 +196,7 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
     const checkContainer2 = document.createElement('div');
     question2.appendChild(checkContainer2)
     checkContainer2.classList.add('check-container');
-    checkContainer2.innerHTML = question2.querySelector('label').innerText;
-
-    const img2 = document.createElement('img');
-    img2.classList.add('img-checkbox')
-    img2.src = 'https://theme.zdassets.com/theme_assets/15904219/2a9213d5902633b7dcbac76be4b4703c0187804a.png';
-    checkContainer2.appendChild(img2);
+    checkContainer2.innerHTML = question2.querySelector('label').innerText.replace('(opcional)', '')
 
     checkContainer2.addEventListener('click', () => {
         const checkbox = document.querySelector('#request_custom_fields_24962889637019');
@@ -216,12 +213,7 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
     const checkContainer3 = document.createElement('div');
     question3.appendChild(checkContainer3)
     checkContainer3.classList.add('check-container');
-    checkContainer3.innerHTML = question3.querySelector('label').innerText;
-
-    const img3 = document.createElement('img');
-    img3.classList.add('img-checkbox')
-    img3.src = 'https://theme.zdassets.com/theme_assets/15904219/2b267f43ba225e4d3f492200a9364fe42060e7a5.png';
-    checkContainer3.appendChild(img3);
+    checkContainer3.innerHTML = question3.querySelector('label').innerText.replace('(opcional)', '')
 
     checkContainer3.addEventListener('click', () => {
         const checkbox = document.querySelector('#request_custom_fields_24962908572315');
@@ -240,20 +232,44 @@ if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br
     const dynamicBTN = document.createElement('div')
     dynamicBTN.classList.add('dynamic-btn')
     dynamicContainer.appendChild(dynamicBTN)
-    question4.appendChild(dynamicContainer)
+    question4.appendChild(dynamicContainer);
 
-    const dynamicTitle = document.querySelector('#.request_custom_fields_2496369830466 label')
+    const question5 = document.querySelector('.request_custom_fields_25139221997339')
+    const checkContainer5 = document.createElement('div')
+    question5.appendChild(checkContainer5)
+    checkContainer5.classList.add('check-container');
+    checkContainer5.innerHTML = question5.querySelector('label').innerText.replace('(opcional)', '')
+
+    checkContainer5.addEventListener('click', () => {
+        const checkbox = document.querySelector('#request_custom_fields_25139221997339');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+            checkContainer5.classList.add('checked')
+        } else {
+            checkContainer5.classList.remove('checked')
+        }
+    })
+
+    const dynamicTitle = document.querySelector('#request_custom_fields_24963698304667_label')
     dynamicTitle.innerHTML = 'Gostaria de manter a sua solicitação aberta e continuar com o atendimento?'
 
     dynamicContainer.addEventListener('click', () => {
         const checkbox = document.querySelector('#request_custom_fields_24963698304667');
         checkbox.checked = !checkbox.checked;
         if (checkbox.checked) {
-            dynamicContainer.classList.add('dynamic-checked');
-            dynamicBTN.style.marginLeft = '30px'
+            dynamicContainer.classList.add('dynamic-checked')
+            dynamicBTN.style.marginLeft = '33px'
         } else {
             dynamicContainer.classList.remove('dynamic-checked')
             dynamicBTN.style.marginLeft = '0px'
         }
     })
+
+    const title = document.querySelector('.container h1');
+    title.innerHTML = 'Por que você considera que o atendimento ainda não está completo?';
+    title.style.width = '50%';
+    title.style.fontSize = '25px';
+
 }
+//fim do código de csat e formulário não atendido
