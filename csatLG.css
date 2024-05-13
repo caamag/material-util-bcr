@@ -138,3 +138,29 @@
 .dynamic-checked {
     background-color: rgb(67, 247, 190);
 }
+
+
+@media screen and (max-width: 600px) {
+    .question-container {
+        margin-top: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .question-container h1 {
+        font-size: 1rem;
+    }
+
+    .icon-content {
+        margin-top: 0px;
+    }
+
+    .star-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .request-form textarea {
+        min-height: 80px;
+    }
+}

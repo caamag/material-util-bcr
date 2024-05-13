@@ -7,7 +7,7 @@ if (currentURL.startsWith(linkForm)) {
     const formTitle = document.querySelector('.container h1');
     formTitle.innerHTML = 'Pesquisa de satisfação';
 
-    const form = document.querySelector('.request-form')
+    const form = document.querySelector('.request-form');
     const formLength = (form.length) - 8;
     const labels = document.querySelectorAll('#new_request div:nth-child(n+7) label');
     const selectedLengths = [0, 0, 0, 0];
