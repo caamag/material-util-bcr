@@ -164,3 +164,33 @@
         min-height: 80px;
     }
 }
+
+.options-container {
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    padding: 10px;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.options-container:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.options {
+    width: 100%;
+    color: black;
+    background-color: rgb(240, 240, 240);
+    transition: 150ms;
+}
+
+.option-name {
+    width: 100%;
+    color: black;
+    background-color: rgb(240, 240, 240);
+    text-decoration: none;
+}
+
+.option-name:hover {
+    background-color: rgb(230, 230, 230);
+}
