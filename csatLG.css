@@ -194,3 +194,22 @@
 .option-name:hover {
     background-color: rgb(230, 230, 230);
 }
+
+@media screen and (max-width: 650px) {
+    h1 {
+        width: 90% !important;
+        font-size: 18px !important;
+    }
+
+    .check-container {
+        width: 80%;
+    }
+
+    #request_custom_fields_24963698304667_label {
+        font-size: 0.8rem;
+    }
+
+    .dynamic-container {
+        width: 80px;
+    }
+}

@@ -163,6 +163,12 @@ if (currentURL.startsWith(linkForm)) {
     }
 };
 
+
+
+
+
+
+
 //form solicitação não atendida
 if (window.location.href.startsWith('https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=24847865198491')) {
 
