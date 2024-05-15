@@ -50,6 +50,27 @@ if (currentURL.startsWith(linkForm)) {
             icons.appendChild(icon)
         }
 
+        //verify NPS question
+        const NPSRegex = /\(NPS\)/;
+        if (NPSRegex.test(titleQuestion.innerText)) {
+            const iconContent = titleQuestion.parentNode.querySelector('.icon-content')
+            iconContent.style.display = 'none'
+
+            const NPSContainer = document.createElement('div');
+            NPSContainer.classList.add('nps-container');
+
+            for (let n = 0; n < 11; n++) {
+                const npsBox = document.createElement('div')
+                npsBox.classList.add('npx-box')
+                npsBox.classList.add(`box-${n}`)
+                npsBox.innerText = n;
+                NPSContainer.appendChild(npsBox)
+
+                npsBox.addEventListener('click', () => {handleClick(npsBox, n, i)})
+            }
+            titleQuestion.parentNode.appendChild(NPSContainer)
+        }
+
         form.appendChild(question)
 
         //creating a submit button
@@ -65,6 +86,28 @@ if (currentURL.startsWith(linkForm)) {
         }
     }
 
+    //getting fields
+    const apiUrl = 'https://lacostebrazil.zendesk.com/api/v2/ticket_forms'
+    const campos = [];
+    async function getFields () {
+
+        const res = await fetch(apiUrl)
+        const data = await res.json()
+        const forms = data.ticket_forms;
+        const csatForm = forms.filter(form => form.name === 'Pesquisa de Satisfação');
+
+        const IDs = csatForm[0].ticket_field_ids.slice(9)
+        console.log(IDs);
+        for (let f = 0; f < IDs.length; f++) {
+            const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
+            if (el.classList.contains('string')) {
+                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} input`))
+            }else{
+                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} textarea`))
+            }
+        }
+    }
+    getFields()
 
     function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
@@ -80,4 +123,20 @@ if (currentURL.startsWith(linkForm)) {
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
+
+    function handleClickNps(star, index, questionIndex) {
+        const allNPSIcons = star.parentNode.querySelectorAll('.nps-box');
+
+        selectedLengths[questionIndex] = index;
+
+        for (let i = 0; i < allNPSIcons.length; i++) {
+            if (i <= index) {
+                allNPSIcons[i].classList.add('selected');
+            } else {
+                allNPSIcons[i].classList.remove('selected');
+            }
+        }
+        campos[questionIndex].value = selectedLengths[questionIndex];
+    }
+
 }

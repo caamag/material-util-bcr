@@ -50,6 +50,7 @@ if (currentURL.startsWith(linkForm)) {
             icon.addEventListener('click', () => { handleClick(icon, j, i) })
             icons.appendChild(icon);
         }
+
         form.appendChild(question)
 
         if ((i + 1) === formLength) {
