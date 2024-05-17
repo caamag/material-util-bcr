@@ -1,4 +1,3 @@
-
 const linkForm = 'https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29035139635219';
 const currentURL = window.location.href;
 if (currentURL.startsWith(linkForm)) {
@@ -6,10 +5,11 @@ if (currentURL.startsWith(linkForm)) {
     //changing title form
     const formTitle = document.querySelector('.container h1');
     formTitle.innerHTML = 'Pesquisa de satisfação';
+    formTitle.style.textAlign = 'center'
 
     const form = document.querySelector('.request-form');
-    const formLength = (form.length) - 8;
-    const labels = document.querySelectorAll('#new_request div:nth-child(n+7) label');
+    const formLength = (form.length) - 9;
+    const labels = document.querySelectorAll('#new_request div:nth-child(n+8) label');
     const selectedLengths = [0, 0, 0, 0];
 
     for (let i = 0; i < formLength; i++) {
@@ -34,12 +34,12 @@ if (currentURL.startsWith(linkForm)) {
         let iconsLength = match ? parseInt(match[1], 10) : 5;
         iconsLength = Math.max(2, Math.min(maxIcons, iconsLength));
 
-        //defining icon image
+        //defining icon imagew
         let imgSource = '';
         if (title.startsWith('*')) {
-            imgSource = 'https://theme.zdassets.com/theme_assets/18268840/48b68ac03a2936b3b0c23e11ed213f0261d56efa.jpg'
+            imgSource = 'https://theme.zdassets.com/theme_assets/19445438/ef3110d121e79b05a3cae002f417c6a78f460c5b.png'
         } else {
-            imgSource = 'https://theme.zdassets.com/theme_assets/18268840/48b68ac03a2936b3b0c23e11ed213f0261d56efa.jpg'
+            imgSource = 'https://theme.zdassets.com/theme_assets/19445438/ef3110d121e79b05a3cae002f417c6a78f460c5b.png'
         }
 
         for (let j = 0; j < iconsLength; j++) {
@@ -50,9 +50,13 @@ if (currentURL.startsWith(linkForm)) {
             icons.appendChild(icon)
         }
 
+
         //verify NPS question
         const NPSRegex = /\(NPS\)/;
         if (NPSRegex.test(titleQuestion.innerText)) {
+
+            const newTitle = titleQuestion.innerText.replace(NPSRegex, '');
+            titleQuestion.innerText = newTitle;
             const iconContent = titleQuestion.parentNode.querySelector('.icon-content')
             iconContent.style.display = 'none'
 
@@ -61,17 +65,59 @@ if (currentURL.startsWith(linkForm)) {
 
             for (let n = 0; n < 11; n++) {
                 const npsBox = document.createElement('div')
-                npsBox.classList.add('npx-box')
+                npsBox.classList.add('nps-box')
                 npsBox.classList.add(`box-${n}`)
                 npsBox.innerText = n;
                 NPSContainer.appendChild(npsBox)
 
-                npsBox.addEventListener('click', () => {handleClick(npsBox, n, i)})
+                npsBox.addEventListener('click', () => { handleClickNps(npsBox, n, i) })
             }
             titleQuestion.parentNode.appendChild(NPSContainer)
         }
 
         form.appendChild(question)
+
+        const textRegex = /\(TXT\)/
+        const optionText = /\(opcional\)/
+        if (textRegex.test(titleQuestion.innerText)) {
+            const iconContent = titleQuestion.parentNode.querySelector('.icon-content')
+            iconContent.style.display = 'none'
+
+            const newTitle = titleQuestion.innerText
+                .replace(textRegex, '')
+                .replace(optionText, '')
+            titleQuestion.innerText = newTitle;
+
+            const textarea = document.createElement('textarea')
+            textarea.classList.add('multilinha')
+            titleQuestion.parentNode.append(textarea)
+        }
+
+        const fields = document.querySelectorAll('.form-field')
+        fields.forEach(field => {
+            field.classList.add('deleted-field')
+        })
+        const ZendeskFields = Array.from(fields)
+        const ZendeskFieldsFilter = ZendeskFields.slice(4)
+        ZendeskFieldsFilter.pop()
+
+        ZendeskFieldsFilter.forEach((field, index) => {
+            field.classList.add(`question${index - 1}`)
+        })
+
+        const textareaField = document.querySelectorAll('.multilinha')
+        textareaField.forEach(field => {
+            const classQuestion = field.parentNode.classList[1];
+            const indexQuestion = classQuestion[classQuestion.length]
+
+            field.addEventListener('input', () => {
+                console.log(ZendeskFieldsFilter[indexQuestion])
+                if (field.parentNode.classList[1] === ZendeskFieldsFilter[indexQuestion].classList[5]) {
+                    ZendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
+                    field.classList.remove('.delete-field')
+                }
+            })
+        })
 
         //creating a submit button
         if ((i + 1) === formLength) {
@@ -89,24 +135,24 @@ if (currentURL.startsWith(linkForm)) {
     //getting fields
     const apiUrl = 'https://lacostebrazil.zendesk.com/api/v2/ticket_forms'
     const campos = [];
-    async function getFields () {
+    async function getFields() {
 
         const res = await fetch(apiUrl)
         const data = await res.json()
         const forms = data.ticket_forms;
         const csatForm = forms.filter(form => form.name === 'Pesquisa de Satisfação');
-
-        const IDs = csatForm[0].ticket_field_ids.slice(9)
-        console.log(IDs);
+        const IDs = csatForm[0].ticket_field_ids.slice(3)
+        console.log(IDs)
         for (let f = 0; f < IDs.length; f++) {
             const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
             if (el.classList.contains('string')) {
                 campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} input`))
-            }else{
+            } else {
                 campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} textarea`))
             }
         }
     }
+
     getFields()
 
     function handleClick(star, index, questionIndex) {
@@ -138,5 +184,4 @@ if (currentURL.startsWith(linkForm)) {
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
-
 }
