@@ -1,9 +1,7 @@
 
 const { getUser } = require('./getUser')
 
-function getDomain(email) {
-    return email.split('@')[1]
-}
+function getDomain(email) { return email.split('@')[1] }
 
 async function fethData() {
 
