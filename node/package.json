@@ -1,0 +1,11 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "códigos feitos em node para situações diversas",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Caio Lopes",
+  "license": "ISC"
+}
