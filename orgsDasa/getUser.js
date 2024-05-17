@@ -11,9 +11,11 @@ async function getUser() {
             Authorization: `Basic ${access}`
         }
     })
-    const data = await res.json();
-    const users = data.users;
-    return users;
+    const data = await res.json()
+    const users = data.users
+    const userWithEmail = users.filter(user => user.email && user.email.trim() !== null)
+    return userWithEmail;
+
 }
 
 module.exports = { getUser }
