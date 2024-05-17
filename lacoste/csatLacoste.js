@@ -2,6 +2,10 @@ const linkForm = 'https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket
 const currentURL = window.location.href;
 if (currentURL.startsWith(linkForm)) {
 
+    //delete default submit input
+    const defaultInput = document.querySelector('input[type=submit]')
+    defaultInput.style.display = 'none'
+
     //changing title form
     const formTitle = document.querySelector('.container h1');
     formTitle.innerHTML = 'Pesquisa de satisfação';
@@ -93,25 +97,20 @@ if (currentURL.startsWith(linkForm)) {
             titleQuestion.parentNode.append(textarea)
         }
 
-        const fields = document.querySelectorAll('.form-field')
-        fields.forEach(field => {
-            field.classList.add('deleted-field')
-        })
         const ZendeskFields = Array.from(fields)
-        const ZendeskFieldsFilter = ZendeskFields.slice(4)
+        const ZendeskFieldsFilter = ZendeskFields.slice(5)
         ZendeskFieldsFilter.pop()
 
         ZendeskFieldsFilter.forEach((field, index) => {
-            field.classList.add(`question${index - 1}`)
+            field.classList.add(`question${index}`)
         })
 
         const textareaField = document.querySelectorAll('.multilinha')
         textareaField.forEach(field => {
             const classQuestion = field.parentNode.classList[1];
-            const indexQuestion = classQuestion[classQuestion.length]
+            const indexQuestion = classQuestion[classQuestion.length - 1]
 
             field.addEventListener('input', () => {
-                console.log(ZendeskFieldsFilter[indexQuestion])
                 if (field.parentNode.classList[1] === ZendeskFieldsFilter[indexQuestion].classList[5]) {
                     ZendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
                     field.classList.remove('.delete-field')
@@ -141,8 +140,16 @@ if (currentURL.startsWith(linkForm)) {
         const data = await res.json()
         const forms = data.ticket_forms;
         const csatForm = forms.filter(form => form.name === 'Pesquisa de Satisfação');
-        const IDs = csatForm[0].ticket_field_ids.slice(3)
-        console.log(IDs)
+
+        let sliceNumber = 0;
+        if (csatForm[0].ticket_field_ids > 6) {
+            sliceNumber = 6
+        } else {
+            sliceNumber = 3
+        }
+
+        const IDs = csatForm[0].ticket_field_ids.slice(sliceNumber)
+
         for (let f = 0; f < IDs.length; f++) {
             const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
             if (el.classList.contains('string')) {
