@@ -7,5 +7,8 @@
     "test": "test"
   },
   "author": "Caio Lopes",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
 }
