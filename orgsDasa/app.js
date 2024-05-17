@@ -1,5 +1,4 @@
 
-const { email } = require('./accsess');
 const { getUser } = require('./getUser')
 
 function getDomain(email) {
@@ -12,7 +11,6 @@ async function fethData() {
     const emails = users.map(user => {
         return user.email
     })
-    console.log(emails.length);
 
 }
 
