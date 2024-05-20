@@ -1,5 +1,5 @@
 
-const { access } = require('./accsess')
+const { access } = require('./data')
 
 async function getUser() {
     const res = await fetch('https://gestohelp.zendesk.com/api/v2/users', {

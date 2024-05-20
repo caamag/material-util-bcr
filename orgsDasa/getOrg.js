@@ -1,4 +1,4 @@
 
-const { access } = require('./accsess')
+const { access } = require('./data')
 
 
