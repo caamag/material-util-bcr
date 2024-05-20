@@ -1,0 +1,4 @@
+
+const { access } = require('./accsess')
+
+

@@ -6,8 +6,8 @@ function getDomain(email) { return email.split('@')[1] }
 async function fethData() {
 
     const users = await getUser();
-    const emails = users.map(user => {
-        return user.email
+    const domains = users.map(user => {
+        return getDomain(user.email)
     })
 
 }
