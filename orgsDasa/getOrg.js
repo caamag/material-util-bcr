@@ -1,4 +1,0 @@
-
-const { access } = require('./data')
-
-
