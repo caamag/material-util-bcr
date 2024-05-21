@@ -1,6 +1,7 @@
 
 const { getUser } = require('./getUser')
 const { getOrgs } = require('./getOrgs')
+const { updateUser } = require('./updateData')
 
 function getDomain(email) { return email.split('@')[1] }
 
@@ -14,12 +15,12 @@ async function fethData() {
 
     users.forEach(user => {
         const userDomain = getDomain(user.email);
-
-
+        orgs.map(org => {
+            if (org.domain_names.includes(userDomain)) {
+                updateUser(user.id, org.id)
+            }
+        })
     })
-
 }
 
 fethData()
-
-module.exports = { getDomain }
