@@ -1,0 +1,6 @@
+
+#dependences
+/node_modules
+
+#ignore access.js file
+/data.js

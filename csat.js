@@ -132,7 +132,7 @@ if (currentURL.startsWith(linkForm)) {
 
         let sliceNumber = 6;
         if (csatForm[0].ticket_field_ids.length < 12) {
-            sliceNumber = 2;
+            sliceNumber = 3;
         }
 
         const IDs = csatForm[0].ticket_field_ids.slice(sliceNumber);
