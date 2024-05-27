@@ -23,8 +23,6 @@ const domains = [
     'lincard.com.br',
     'medical.com.br',
     'metlife.com',
-    'metlife.com',
-    'metlife.com',
     'neobaby.com.br',
     'odontoprev.com.br',
     'omint.com.br',
@@ -49,7 +47,6 @@ const domains = [
     'servdonto.com.br',
     'sistemasplanosdesaude.com.br',
     'sompo.com.br',
-    'sulamerica.com.br',
     'sulamerica.com.br',
     'teladoc.com.br',
     'tokiomarine.com.br',
@@ -80,7 +77,3 @@ const domains = [
 ]
 
 module.exports = { domains }
-
-//usuários criados
-//joaozinho
-//pedrin

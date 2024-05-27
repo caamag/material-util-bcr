@@ -25,6 +25,7 @@ async function getOrgs() {
 
         if (data.next_page) {
             page++
+            console.log('Orgs capuradas' + orgs.length);
         } else {
             newPages = false;
         }

@@ -21,7 +21,7 @@ async function getUser() {
         //nextPage
         if (data.next_page) {
             page++
-            console.log(users.length);
+            console.log('Usuários capturados' + users.length);
         } else {
             newPages = false;
         }
