@@ -70,7 +70,7 @@ if (currentURL.startsWith(linkForm)) {
     h2Textearea.forEach(text => {
         if (regexText.test(text.innerText)) {
             const questionWithTextArea = text.parentNode;
-          	questionWithTextArea.style.flexDirection = 'column';
+            questionWithTextArea.style.flexDirection = 'column';
             questionWithTextArea.style.marginBottom = '30px';
             questionWithTextArea.style.alignItems = 'start';
             const iconContent = questionWithTextArea.querySelectorAll('.icon-content');
@@ -153,10 +153,10 @@ if (currentURL.startsWith(linkForm)) {
         for (let i = 0; i < allStars.length; i++) {
             if (i <= index) {
                 allStars[i].classList.add('selected');
-              	allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/ec8f628882d88500dd00a82f7ef5313585e49fa4.png'
+                allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/ec8f628882d88500dd00a82f7ef5313585e49fa4.png'
             } else {
                 allStars[i].classList.remove('selected');
-              	allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/d4cb6311f25109edeaaba3b334851438a16668ee.png'
+                allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/d4cb6311f25109edeaaba3b334851438a16668ee.png'
             }
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
@@ -165,7 +165,7 @@ if (currentURL.startsWith(linkForm)) {
     //garantindo nota máxima
     form.addEventListener('submit', () => {
         zendeskFieldsFilter.forEach(field => {
-            if (field.querySelector('input').value > 5) {
+            if (field.querySelector('input').value > 5 && !field.classList.contains('question0')) {
                 field.querySelector('input').value = 5;
             }
         })
