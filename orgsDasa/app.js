@@ -16,7 +16,7 @@ async function fethData() {
     users.forEach(user => {
         const userDomain = getDomain(user.email);
         orgs.map(org => {
-            if (org.domain_names.includes(userDomain)) {
+            if (user.email && org.domain_names.includes(userDomain)) {
                 console.log(`${user.email} | ${org.domain_names}`);
             }
         })

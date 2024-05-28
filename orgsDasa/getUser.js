@@ -1,4 +1,3 @@
-
 const { access } = require('./data')
 
 async function getUser() {
@@ -16,7 +15,7 @@ async function getUser() {
         })
 
         const data = await res.json()
-        users = users.concat(data.users.filter(user => user.email && user.email.trim() !== null));
+        users = users.concat(data.users);
 
         //nextPage
         if (data.next_page) {
