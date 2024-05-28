@@ -18,7 +18,6 @@ async function fethData() {
         orgs.map(org => {
             if (org.domain_names.includes(userDomain)) {
                 console.log(`${user.email} | ${org.domain_names}`);
-                updateUser(user.id, org.id)
             }
         })
     })

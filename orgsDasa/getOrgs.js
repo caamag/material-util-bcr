@@ -9,7 +9,7 @@ async function getOrgs() {
     let newPages = true;
 
     while (newPages) {
-        const res = await fetch(`https://con-bcrcx-caio.zendesk.com/api/v2/organizations?page=${page}`, {
+        const res = await fetch(`https://gestohelp.zendesk.com/api/v2/organizations?page=${page}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Basic ${access}`

@@ -8,7 +8,7 @@ async function getUser() {
     let newPages = true;
 
     while (newPages) {
-        const res = await fetch(`https://con-bcrcx-caio.zendesk.com/api/v2/users?page=${page}`, {
+        const res = await fetch(`https://gestohelp.zendesk.com/api/v2/users?page=${page}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Basic ${access}`
