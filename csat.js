@@ -171,3 +171,36 @@ if (currentURL.startsWith(linkForm)) {
         })
     })
 };
+
+
+if (window.location.href === 'https://centraldocliente.lg.com.br/hc/pt-br/requests/new') {
+    const optionContainer = document.querySelector('.options-container');
+    const options = document.querySelector('.options');
+    let isRendered = false;
+
+    optionContainer.addEventListener('click', async () => {
+        if (isRendered) {
+            options.innerHTML = '';
+            isRendered = false;
+            return;
+        }
+
+        const res = await fetch('/api/v2/ticket_forms');
+        const data = await res.json()
+        const forms = data.ticket_forms.filter(form => form.restricted_brand_ids.includes(22592839539611)
+            && form.raw_display_name !== "Solicitação não atendida"
+            && form.raw_display_name !== "Pesquisa de satisfação"
+            && form.restricted_brand_ids != []);
+
+        forms.map(form => {
+            let content = `
+                <a href="https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=${form.id}" 
+                class="option-name" target='blank'>
+                    ${form.display_name}
+                </a><br><br>
+            `;
+            options.insertAdjacentHTML('afterbegin', content);
+        })
+        isRendered = true;
+    })
+}
