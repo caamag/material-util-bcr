@@ -15,12 +15,15 @@ async function getUser() {
         })
 
         const data = await res.json()
-        users = users.concat(data.users);
+        users = users.concat(data.users)
+
+        if (page === 10) {
+            newPages = false;
+        }
 
         //nextPage
         if (data.next_page) {
             page++
-            console.log('Usuários capturados' + users.length);
         }
     }
     return users;
