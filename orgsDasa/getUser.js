@@ -7,26 +7,31 @@ async function getUser() {
     let newPages = true;
 
     while (newPages) {
-        const res = await fetch(`https://gestohelp.zendesk.com/api/v2/users?page=${page}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Basic ${access}`
+        try {
+            const res = await fetch(`https://gestohelp.zendesk.com/api/v2/users?page=${page}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Basic ${access}`
+                }
+            })
+
+            const data = await res.json()
+            users = users.concat(data.users)
+
+            //nextPage
+            if (data.next_page) {
+                page++
+                console.log(`Usuários carregados ${users.length}`);
+            } else {
+                newPages = false;
             }
-        })
-
-        const data = await res.json()
-        users = users.concat(data.users)
-
-        if (page === 10) {
-            newPages = false;
-        }
-
-        //nextPage
-        if (data.next_page) {
-            page++
+        } catch (error) {
+            console.log(error.message);
         }
     }
     return users;
 }
+
+getUser()
 
 module.exports = { getUser }
