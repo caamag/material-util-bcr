@@ -22,10 +22,8 @@ async function getOrgs() {
         });
 
         orgs = orgs.concat(filteredOrgs);
-
         if (data.next_page) {
             page++
-            console.log(`Orgs capturada ${orgs.length}`);
         } else {
             newPages = false;
         }
