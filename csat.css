@@ -239,3 +239,8 @@
 .nps-tag {
     display: none;
 }
+
+.selected {
+    opacity: 1 !important;
+    scale: 1.1 !important;
+}

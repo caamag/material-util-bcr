@@ -42,6 +42,7 @@ if (currentURL.startsWith(linkFormCSAT)) {
             const icon = document.createElement('img');
             icon.className = `star-icon icon${i}`
             icon.src = imgSource;
+            icon.addEventListener('click', () => { handleClick(icon, j, i) })
             icons.appendChild(icon);
         }
         form.appendChild(question)
@@ -91,6 +92,21 @@ if (currentURL.startsWith(linkFormCSAT)) {
         }
     })
 
+    //preenchendo conteúdo do campo de texto
+    const formZendeskFields = document.querySelectorAll('.form-field');
+    const zendeskFields = Array.from(formZendeskFields);
+    let zendeskFieldsFilter = zendeskFields.slice(4);
+    zendeskFieldsFilter.pop();
+
+    zendeskFieldsFilter.forEach(field => {
+        const index = zendeskFieldsFilter.indexOf(field);
+        field.classList.add(`question${index}`)
+    });
+
+    //ajustar o indice no slice do zendeskFieldsFilter pois está sendo incluido o ticket_field_id 
+
+
+
     const apiUrl = 'https://office-total.zendesk.com/api/v2/ticket_forms'
     const campos = [];
     const getFields = async () => {
@@ -100,9 +116,34 @@ if (currentURL.startsWith(linkFormCSAT)) {
         const csatForm = forms.filter(form => form.name === 'Pesquisa de CSAT')
 
         const IDs = csatForm[0].ticket_field_ids.slice(9)
-
+        for (let f = 0; f < IDs.length; f++) {
+            const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
+            if (el.classList.contains('string')) {
+                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} input`))
+            } else if (el.classList.contains('text')) {
+                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} textarea`))
+            }
+        }
     }
 
     getFields()
+
+    function handleClick(star, index, questionIndex) {
+        const allStars = star.parentNode.querySelectorAll('.star-icon');
+        selectedLengths[questionIndex] = index + 1;
+
+        for (let i = 0; i < allStars.length; i++) {
+            if (i <= index) {
+                allStars[i].classList.add('selected');
+                allStars[i].src = 'https://office-total.zendesk.com/hc/theming_assets/01HZJ7YMYHCP9JFM0RNGN1WYQK'
+            } else {
+                allStars[i].classList.remove('selected');
+                allStars[i].src = 'https://office-total.zendesk.com/hc/theming_assets/01HZJ766D2D0YKEBCEWCR05CAD'
+            }
+        }
+        campos[questionIndex].value = selectedLengths[questionIndex];
+    }
+
+
 
 }
