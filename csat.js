@@ -127,7 +127,7 @@ if (currentURL.startsWith(linkForm)) {
         const res = await fetch(apiUrl)
         const data = await res.json()
         const forms = data.ticket_forms;
-        const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
+        const csatForm = forms.filter(form => form.name = 'Formulário de CSAT');
         let sliceNumber = 6;
         if (csatForm[0].ticket_field_ids.length < 12) {
             sliceNumber = 2;

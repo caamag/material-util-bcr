@@ -213,3 +213,29 @@
         width: 80px;
     }
 }
+
+
+/*CSAT Office*/
+.icon-content-csat {
+    display: flex;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+.star-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: 150ms;
+    opacity: 0.8;
+    scale: 0.8;
+}
+
+.star-icon:hover {
+    opacity: 1;
+    scale: 1;
+}
+
+.nps-tag {
+    display: none;
+}
