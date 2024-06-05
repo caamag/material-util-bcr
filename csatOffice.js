@@ -133,8 +133,6 @@ if (currentURL.startsWith(linkFormCSAT)) {
         footerForm.style.display = 'none';
     })
 
-    //ajustar o indice no slice do zendeskFieldsFilter pois está sendo incluido o ticket_field_id 
-
 
 
     const apiUrl = 'https://office-total.zendesk.com/api/v2/ticket_forms'
@@ -178,5 +176,4 @@ if (currentURL.startsWith(linkFormCSAT)) {
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
-
 }
