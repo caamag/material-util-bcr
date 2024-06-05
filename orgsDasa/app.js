@@ -8,11 +8,6 @@ async function fethData() {
 
     const users = await getUser()
     console.log('Usuários capturados');
-    users.map(user => {
-        if (user.email) {
-            console.log(user.email);
-        }
-    })
 
     const orgs = await getOrgs();
     console.log('Organizações carregadas ' + orgs.length);

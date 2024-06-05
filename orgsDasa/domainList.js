@@ -16,7 +16,6 @@ const domains = [
     'greenline.com.br',
     'gympass.com',
     'hapvida.com.br',
-    'hapvida.com.br',
     'icatuseguros.com.br',
     'inpao.com.br',
     'interodonto.com.br',

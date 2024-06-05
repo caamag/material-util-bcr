@@ -4,7 +4,7 @@ const { access } = require('./data');
 //1717428601
 const endpoint = 'https://gestohelp.zendesk.com/api/v2/incremental/users';
 async function getUser (page = 1, users = []) {
-    if (page === 10) {
+    if (page === 15) {
         return;
     }
 
