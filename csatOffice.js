@@ -21,21 +21,31 @@ if (currentURL.startsWith(linkFormCSAT)) {
         question.appendChild(titleQuestion)
 
         //icons
-        const icons = document.createElement('div');
+        const icons = document.createElement('div')
         icons.className = 'icon-content-csat';
         question.appendChild(icons)
-
         var title = titleQuestion.innerText.trim()
-        const regexNumber = /\((\d+)\)/;
-        const match = title.match(regexNumber)
-
-        const maxIcons = 5;
-        let iconsLength = match ? parseInt(match[1], 10) : 5;
+    
         let imgSource = ''
         if (title.startsWith('*')) {
             imgSource = 'https://office-total.zendesk.com/hc/theming_assets/01HZJ766D2D0YKEBCEWCR05CAD'
+            titleQuestion.innerText = title.substring(1)
         } else {
             imgSource = 'https://office-total.zendesk.com/hc/theming_assets/01HZJ766D2D0YKEBCEWCR05CAD'
+        }
+
+        const regexNumber = /\((\d+)\)/;
+        const match = regexNumber.exec(title)
+        let iconsLength;
+        if (regexNumber.test(title)) {
+            iconsLength = match ? parseInt(match[1], 10) : 5;
+            const textWithoutTag = title.replace(regexNumber, `<span class='nps-tag'>$&</span>`)
+            titleQuestion.innerHTML = textWithoutTag;
+            if (title.startsWith('*')) {
+                titleQuestion.innerHTML = textWithoutTag.substring(1)
+            }
+        }else{
+            iconsLength = 5;
         }
 
         for (let j = 0; j < iconsLength; j++) {
@@ -103,6 +113,26 @@ if (currentURL.startsWith(linkFormCSAT)) {
         field.classList.add(`question${index}`)
     });
 
+    formZendeskFields.forEach(field => {
+        field.classList.add('deleted-field')
+    })
+
+    const textareaFields = document.querySelectorAll('.multilinha')
+    textareaFields.forEach(field => {
+        const classQuestion = field.parentNode.classList[1]
+        const indexQuestion = classQuestion[classQuestion.length - 1]
+
+        field.addEventListener('input', () => {
+            if (field.parentNode.classList[1] === zendeskFieldsFilter[indexQuestion].classList[4]) {
+                zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
+                field.classList.remove('.delete-field')
+            }
+        })
+
+        const footerForm = document.querySelector('.request-form footer');
+        footerForm.style.display = 'none';
+    })
+
     //ajustar o indice no slice do zendeskFieldsFilter pois está sendo incluido o ticket_field_id 
 
 
@@ -115,7 +145,12 @@ if (currentURL.startsWith(linkFormCSAT)) {
         const forms = data.ticket_forms;
         const csatForm = forms.filter(form => form.name === 'Pesquisa de CSAT')
 
-        const IDs = csatForm[0].ticket_field_ids.slice(9)
+        let sliceNumber = 9;
+        if (csatForm[0].ticket_field_ids.length < 14) {
+            sliceNumber = 3
+        }            
+
+        const IDs = csatForm[0].ticket_field_ids.slice(sliceNumber)
         for (let f = 0; f < IDs.length; f++) {
             const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
             if (el.classList.contains('string')) {
@@ -143,7 +178,5 @@ if (currentURL.startsWith(linkFormCSAT)) {
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
     }
-
-
 
 }

@@ -32,7 +32,6 @@ if (currentURL.startsWith(linkForm)) {
 
         const maxIcons = 10;
         let iconsLength = match ? parseInt(match[1], 10) : 5;
-
         iconsLength = Math.max(2, Math.min(maxIcons, iconsLength));
 
         //definindo ícones
