@@ -172,6 +172,10 @@ if (currentURL.startsWith(linkForm)) {
 };
 
 
+
+
+
+
 if (window.location.href === 'https://centraldocliente.lg.com.br/hc/pt-br/requests/new') {
     const optionContainer = document.querySelector('.options-container');
     const options = document.querySelector('.options');

@@ -61,11 +61,11 @@
     color: white;
 }
 
-.submit-btn{
+.submit-btn {
     margin-top: 30px;
 }
 
-.nps-icons-container{
+.nps-icons-container {
     display: flex;
     width: 100%;
     height: 50px;
@@ -74,22 +74,22 @@
     flex-wrap: wrap;
 }
 
-.nps-icons-container > :nth-child(-n + 6){
+.nps-icons-container> :nth-child(-n + 6) {
     background-color: rgb(251, 43, 20);
 }
 
-.nps-icons-container > :nth-child(7),
-.nps-icons-container > :nth-child(8){
+.nps-icons-container> :nth-child(7),
+.nps-icons-container> :nth-child(8) {
     background-color: rgb(251, 209, 20);
 }
 
-.nps-icons-container > :nth-child(9),
-.nps-icons-container > :nth-child(10){
+.nps-icons-container> :nth-child(9),
+.nps-icons-container> :nth-child(10) {
     background-color: rgb(43, 251, 20);
 }
 
 
-.nps-icon{
+.nps-icon {
     height: 50px;
     width: 50px;
     display: flex;
@@ -104,6 +104,39 @@
     scale: 1.025;
 }
 
-.selected-nps{
+.selected-nps {
     border: 4px solid black;
+}
+
+/*Restringindo form*/
+.options-container {
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    padding: 10px;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.options-container:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+
+.options {
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    transition: 150ms;
+}
+
+.option-name {
+    width: 100%;
+    color: black !important;
+    background-color: rgb(240, 240, 240);
+    padding: 10px;
+    padding-right: 50%;
+    text-decoration: none !important;
+}
+
+.option-name:hover {
+    background-color: rgb(230, 230, 230);
 }
