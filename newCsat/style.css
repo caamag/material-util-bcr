@@ -1,0 +1,12 @@
+.csat-btn {
+    border: none;
+    background-color: rgb(49, 92, 234);
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.csat-btn:hover {
+    background-color: rgb(40, 76, 197);
+}
