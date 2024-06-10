@@ -14,10 +14,15 @@ async function getCsatFields() {
     const orderFields = txtFields.concat(fieldWithoutTxt)
 
     orderFields.map((field, index) => {
-
+        const title = field.title_in_portal;
+        let titleWithouTXT = title
+        if (regex.test(title)) {
+			titleWithouTXT = title.replace(regex, '')
+        }
+    
         let content = `
             <div class="question-container question${orderFields.length - index}">
-                <h3 class="question-title">${field.title_in_portal}</h3>
+                <h3 class="question-title">${titleWithouTXT}</h3>
                 <div class="icons-container"></div>
             </div>
         `
@@ -71,9 +76,35 @@ function handleSubmit() {
     const index = parseInt(lastString(indexTextarea))
 
     const notesToSubmit = notes.reverse()
-    notesToSubmit[index - 1] = textarea.value;
+    notesToSubmit[notes.length - 1] = textarea.value;
     console.log(notesToSubmit);
 }
 
 const submitBnt = document.querySelector('.csat-btn')
 submitBnt.addEventListener('click', () => { handleSubmit() })
+
+
+//atualização do ticket
+async function updateTicket () {
+    const urlZendesk = `https://con-bcrcx-caio.zendesk.com/api/v2/requests/150`
+    const ticketBody = {
+        request:{
+            comment: {
+                body: 'ticket atualizado pelo guide.',
+                public: false
+            }
+        }
+    }
+
+    try {
+        const response = await fetch(urlZendesk, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ticketBody)
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
