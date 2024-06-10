@@ -1,9 +1,9 @@
 
-async function getBrand() {
-
-    const res = await fetch('/api/v2/brands')
-    const data = await res.json()
-    console.log(data);
+async function fetchData() {
+    const res = await fetch('/api/v2/ticket_forms');
+    const data = await res.json();
+    const forms = data.ticket_forms[2]
+    console.log(forms);
 }
 
-getBrand()
+fetchData()
