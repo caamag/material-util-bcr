@@ -85,26 +85,44 @@ submitBnt.addEventListener('click', () => { handleSubmit() })
 
 
 //atualização do ticket
-async function updateTicket () {
-    const urlZendesk = `https://con-bcrcx-caio.zendesk.com/api/v2/requests/150`
-    const ticketBody = {
-        request:{
+async function criarTicketRegister() {
+    const urlZendesk = 'https://bcrcxproxyapi.azurewebsites.net/proxy/lacoste-argentina.zendesk.com/api/v2/requests.json';
+    const customFields = [
+        { id: 27333159915411, value: document.getElementById('open-cadastro-button').value },
+        { id: 27345085222419, value: document.getElementById('registration').value },
+    ];
+ 
+    const payloadTicket = {
+        request: {
+            subject: "Dúvida sobre: cadastro",
+            requester: {
+                email: document.getElementById('email-cadastro').value,
+                name: document.getElementById('name-cadastro').value
+            },
             comment: {
-                body: 'ticket atualizado pelo guide.',
-                public: false
-            }
+                body: document.getElementById('description-cadastro').value,
+            },
+            custom_fields: customFields
         }
-    }
+    };
 
     try {
         const response = await fetch(urlZendesk, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(ticketBody)
-        })
+            body: JSON.stringify(payloadTicket)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao criar o ticket');
+        }
+        closeAllModals();
+       	showToast('Ticket criado com sucesso!');
+
     } catch (error) {
-        console.log(error);
+        console.error('Erro:', error);
+        alert('Erro ao criar o ticket');
     }
 }
