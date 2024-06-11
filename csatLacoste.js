@@ -206,4 +206,90 @@ if (currentURL.startsWith(linkForm)) {
 
     const heroInner = document.querySelector('.hero')
     heroInner.style.display = 'none'
+
+    //removendo outros na página de csat
+    const outros = document.querySelector('.outros')
+    outros.style.display = 'none'
 }
+
+//ajustes no formulário de abertura de ticket 
+if (window.location.href === 'https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=24141230581395'
+    || window.location.href === 'https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=24141230581395&tf_27333159915411=outros_assuntos'
+) {
+    const heroContainer = document.querySelector('.hero-inner')
+    heroContainer.style.display = 'none'
+
+    //centralizando título
+    const title = document.querySelectorAll('h1')
+    title.forEach(title => {
+        title.style.textAlign = 'center'
+    })
+
+    //removendo campo 'outros'
+    const outros = document.querySelector('.outros')
+    outros.style.display = 'none'
+
+    //ajustando search
+    const searchForm = document.querySelector('.search');
+    searchForm.style.width = '20vw'
+
+    //removendo campo de seleção de formulários
+    const selectFormField = document.querySelector('.request_ticket_form_id')
+    selectFormField.style.display = 'none'
+}
+
+
+//ajustando página de new request
+if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new') {
+
+    //removendo cards de seleção
+    const heroContainer = document.querySelector('.hero-inner')
+    heroContainer.style.display = 'none'
+
+    //centralizando título
+    const title = document.querySelectorAll('h1')
+    title.forEach(title => {
+        title.style.textAlign = 'center'
+    })
+
+    //ajustando search
+    const searchForm = document.querySelector('.search');
+    searchForm.style.width = '20vw'
+
+    //diminuindo espaçamento de cima
+    const divider = document.querySelector('.container-divider')
+    divider.style.height = '20px'
+    const subNav = document.querySelector('.sub-nav')
+    subNav.style.marginTop = '20px'
+
+    //removendo campo 'outros'
+    const outros = document.querySelector('.outros')
+    outros.style.display = 'none'
+}
+
+const container = document.querySelector('.container');
+container.style.marginTop = '-300px'
+
+
+
+
+
+//código para monitorar se o footer está sendo focado
+document.addEventListener("DOMContentLoaded", function () {
+    const footer = document.querySelector('footer');
+
+    // Verifique se o footer está sendo focado automaticamente
+    if (document.activeElement === footer) {
+        document.activeElement.blur();
+    }
+
+    // Verifique se há alguma função de rolagem ativa
+    window.scrollTo(0, 0);
+
+    // Monitorar se há rolagens adicionais
+    setTimeout(() => {
+        if (window.scrollY > 0) {
+            window.scrollTo(0, 0);
+        }
+    }, 1000);
+});
