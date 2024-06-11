@@ -191,7 +191,7 @@ if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/req
         const res = await fetch('/api/v2/ticket_forms');
         const data = await res.json()
         const forms = data.ticket_forms.filter(form => form.restricted_brand_ids.includes(27109490332819)
-        && form.id !== 29831660997779);
+            && form.id !== 29831660997779);
 
         forms.map(form => {
             let content = `
