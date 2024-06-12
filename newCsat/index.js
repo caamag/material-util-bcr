@@ -17,9 +17,9 @@ async function getCsatFields() {
         const title = field.title_in_portal;
         let titleWithouTXT = title
         if (regex.test(title)) {
-			titleWithouTXT = title.replace(regex, '')
+            titleWithouTXT = title.replace(regex, '')
         }
-    
+
         let content = `
             <div class="question-container question${orderFields.length - index}">
                 <h3 class="question-title">${titleWithouTXT}</h3>
@@ -91,7 +91,7 @@ async function criarTicketRegister() {
         { id: 27333159915411, value: document.getElementById('open-cadastro-button').value },
         { id: 27345085222419, value: document.getElementById('registration').value },
     ];
- 
+
     const payloadTicket = {
         request: {
             subject: "Dúvida sobre: cadastro",
@@ -119,7 +119,7 @@ async function criarTicketRegister() {
             throw new Error('Erro ao criar o ticket');
         }
         closeAllModals();
-       	showToast('Ticket criado com sucesso!');
+        showToast('Ticket criado com sucesso!');
 
     } catch (error) {
         console.error('Erro:', error);

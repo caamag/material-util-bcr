@@ -1,0 +1,20 @@
+.website-links {
+    display: flex;
+    margin-left: 20px;
+}
+
+.website-links ul {
+    display: flex;
+    margin-left: 20px;
+}
+
+.website-links li {
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    .website-links ul {
+        display: none;
+    }
+}
