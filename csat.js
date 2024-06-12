@@ -171,11 +171,6 @@ if (currentURL.startsWith(linkForm)) {
     })
 };
 
-
-
-
-
-
 if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new') {
     const optionContainer = document.querySelector('.options-container');
     const options = document.querySelector('.options');
@@ -207,3 +202,36 @@ if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/req
     const defaultField = document.querySelector('.form-field')
     defaultField.style.display = 'none'
 }
+
+
+const submitBrn = document.querySelector('.submit-btn');
+submitBrn.addEventListener('click', () => {
+    const question0 = document.querySelector('.request_custom_fields_29374031228947')
+    .querySelector('input')
+
+    const question1 = document.querySelector('.request_custom_fields_29374139533459')
+    .querySelector('input')
+
+    const question2 = document.querySelector('.request_custom_fields_30052257745555')
+    .querySelector('input')
+
+    if (question0.value === '' && question1.value === '') {
+        question0.value = '0'
+        question1.value = '0'
+    }else if (question0.value === '') {
+        question0.value = '0'
+    }else if (question1.value === '') {
+        question1.value = '0'
+    }
+
+    if (question2.value === '') {
+        question2.value = 'Cliente não fez nenhum comentário'
+    }
+})
+
+const formFields = document.querySelectorAll('.form-field');
+formFields.forEach(field => {
+    if (field.querySelector('.upload-dropzone')) {
+        field.style.display = 'none'
+    }
+})
