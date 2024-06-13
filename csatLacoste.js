@@ -215,6 +215,7 @@ if (currentURL.startsWith(linkForm)) {
 //ajustes no formulário de abertura de ticket 
 if (window.location.href === 'https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=24141230581395'
     || window.location.href === 'https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=24141230581395&tf_27333159915411=outros_assuntos'
+    || window.location.href.startsWith("https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29763329852179")
 ) {
     const heroContainer = document.querySelector('.hero-inner')
     heroContainer.style.display = 'none'
@@ -238,6 +239,33 @@ if (window.location.href === 'https://lacostebrazil.zendesk.com/hc/pt-br/request
     selectFormField.style.display = 'none'
 }
 
+//ajustando formulário de negativa de ticket
+if (window.location.href.startsWith('https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29763329852179')) {
+    const subject = document.querySelector('.request_subject')
+    subject.style.display = 'none'
+
+    const description = document.querySelector('.request_description');
+    description.style.display = 'none'
+
+    const ticketIDField = document.querySelector('.request_custom_fields_29035220664979')
+    ticketIDField.style.display = 'none'
+
+    const title = document.querySelector('h1')
+    title.style.textAlign = 'center'
+
+    const hero = document.querySelector('.hero')
+    hero.style.display = 'none'
+
+    const selectedForm = document.querySelector('.request_ticket_form_id')
+    selectedForm.style.display = 'none'
+
+    const fields = document.querySelectorAll('.form-field')
+    fields.forEach(field => {
+        if (field.querySelector('.upload-dropzone')) {
+            field.style.display = 'none'
+        }
+    })
+}
 
 //ajustando página de new request
 if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new') {
