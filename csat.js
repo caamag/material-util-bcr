@@ -32,6 +32,7 @@ if (currentURL.startsWith(linkForm)) {
 
         const maxIcons = 10;
         let iconsLength = match ? parseInt(match[1], 10) : 5;
+
         iconsLength = Math.max(2, Math.min(maxIcons, iconsLength));
 
         //definindo ícones
@@ -69,7 +70,7 @@ if (currentURL.startsWith(linkForm)) {
     h2Textearea.forEach(text => {
         if (regexText.test(text.innerText)) {
             const questionWithTextArea = text.parentNode;
-            questionWithTextArea.style.flexDirection = 'column';
+          	questionWithTextArea.style.flexDirection = 'column';
             questionWithTextArea.style.marginBottom = '30px';
             questionWithTextArea.style.alignItems = 'start';
             const iconContent = questionWithTextArea.querySelectorAll('.icon-content');
@@ -126,7 +127,7 @@ if (currentURL.startsWith(linkForm)) {
         const res = await fetch(apiUrl)
         const data = await res.json()
         const forms = data.ticket_forms;
-        const csatForm = forms.filter(form => form.name = 'Formulário de CSAT');
+        const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
         let sliceNumber = 6;
         if (csatForm[0].ticket_field_ids.length < 12) {
             sliceNumber = 2;
@@ -147,15 +148,16 @@ if (currentURL.startsWith(linkForm)) {
 
     function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
+
         selectedLengths[questionIndex] = index + 1;
 
         for (let i = 0; i < allStars.length; i++) {
             if (i <= index) {
                 allStars[i].classList.add('selected');
-                allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/ec8f628882d88500dd00a82f7ef5313585e49fa4.png'
+              	allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/ec8f628882d88500dd00a82f7ef5313585e49fa4.png'
             } else {
                 allStars[i].classList.remove('selected');
-                allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/d4cb6311f25109edeaaba3b334851438a16668ee.png'
+              	allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/d4cb6311f25109edeaaba3b334851438a16668ee.png'
             }
         }
         campos[questionIndex].value = selectedLengths[questionIndex];
@@ -164,74 +166,32 @@ if (currentURL.startsWith(linkForm)) {
     //garantindo nota máxima
     form.addEventListener('submit', () => {
         zendeskFieldsFilter.forEach(field => {
-            if (field.querySelector('input').value > 5 && !field.classList.contains('question0')) {
+            if (field.querySelector('input').value > 5 && !field.classList.contains('question0') ) {
                 field.querySelector('input').value = 5;
             }
         })
+
+        //questions
+        const question1 = document.querySelector('.request_custom_fields_24263396283163').querySelector('input')
+        const question2 = document.querySelector('.request_custom_fields_24263400713883').querySelector('input')
+        const question3 = document.querySelector('.request_custom_fields_24263617572763').querySelector('input')
+        const question4 = document.querySelector('.request_custom_fields_24263426386971').querySelector('input')
+        const questionComment = document.querySelector('.request_custom_fields_24263866618651').querySelector('input')
+
+        if (question1.value === '') {
+            question1.value = 1;
+        }
+        if (question2.value === '') {
+            question2.value = 1;
+        }
+        if (question3.value === '') {
+            question3.value = 1;
+        }
+        if (question4.value === '') {
+            question4.value = 1;
+        }
+        if (questionComment.value === '') {
+            questionComment.value = 'Cliente não fez nenhum comentário';
+        }
     })
 };
-
-if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new') {
-    const optionContainer = document.querySelector('.options-container');
-    const options = document.querySelector('.options');
-    let isRendered = false;
-
-    optionContainer.addEventListener('click', async () => {
-        if (isRendered) {
-            options.innerHTML = '';
-            isRendered = false;
-            return;
-        }
-
-        const res = await fetch('/api/v2/ticket_forms');
-        const data = await res.json()
-        const forms = data.ticket_forms.filter(form => form.restricted_brand_ids.includes(27109490332819)
-            && form.id !== 29831660997779);
-
-        forms.map(form => {
-            let content = `
-                <a href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=${form.id}" 
-                class="option-name" target='blank'>
-                    ${form.display_name}
-                </a><br><br>
-            `;
-            options.insertAdjacentHTML('afterbegin', content);
-        })
-        isRendered = true;
-    })
-    const defaultField = document.querySelector('.form-field')
-    defaultField.style.display = 'none'
-}
-
-
-const submitBrn = document.querySelector('.submit-btn');
-submitBrn.addEventListener('click', () => {
-    const question0 = document.querySelector('.request_custom_fields_29374031228947')
-    .querySelector('input')
-
-    const question1 = document.querySelector('.request_custom_fields_29374139533459')
-    .querySelector('input')
-
-    const question2 = document.querySelector('.request_custom_fields_30052257745555')
-    .querySelector('input')
-
-    if (question0.value === '' && question1.value === '') {
-        question0.value = '0'
-        question1.value = '0'
-    }else if (question0.value === '') {
-        question0.value = '0'
-    }else if (question1.value === '') {
-        question1.value = '0'
-    }
-
-    if (question2.value === '') {
-        question2.value = 'Cliente não fez nenhum comentário'
-    }
-})
-
-const formFields = document.querySelectorAll('.form-field');
-formFields.forEach(field => {
-    if (field.querySelector('.upload-dropzone')) {
-        field.style.display = 'none'
-    }
-})
