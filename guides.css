@@ -121,3 +121,15 @@
     color: white;
     text-decoration: none;
 }
+
+.header-inner {
+    position: absolute;
+    top: 30px;
+    left: 100px;
+}
+
+.header-inner a{
+    color: white;
+    font-size: 40px;
+    font-weight: 400;
+}
