@@ -298,7 +298,17 @@ if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/req
 const container = document.querySelector('.container');
 container.style.marginTop = '-300px'
 
+if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new?ticket_form_id=28362721571859') {
+    const title = document.querySelector('h1')
+    title.innerHTML = 'Enviar Solicitación'
+    title.style.textAlign = 'center'
 
+    const hero = document.querySelector('.hero')
+    hero.style.display = 'none'
+
+    const submitBtn = document.querySelector('input[type=submit]')
+    submitBtn.classList.add('form-submit-btn')
+}
 
 
 
