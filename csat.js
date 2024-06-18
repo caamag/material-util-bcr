@@ -32,6 +32,7 @@ if (currentURL.startsWith(linkForm)) {
 
         const maxIcons = 10;
         let iconsLength = match ? parseInt(match[1], 10) : 5;
+
         iconsLength = Math.max(2, Math.min(maxIcons, iconsLength));
 
         //definindo ícones
@@ -126,7 +127,7 @@ if (currentURL.startsWith(linkForm)) {
         const res = await fetch(apiUrl)
         const data = await res.json()
         const forms = data.ticket_forms;
-        const csatForm = forms.filter(form => form.name = 'Formulário de CSAT');
+        const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
         let sliceNumber = 6;
         if (csatForm[0].ticket_field_ids.length < 12) {
             sliceNumber = 2;
@@ -147,6 +148,7 @@ if (currentURL.startsWith(linkForm)) {
 
     function handleClick(star, index, questionIndex) {
         const allStars = star.parentNode.querySelectorAll('.star-icon');
+
         selectedLengths[questionIndex] = index + 1;
 
         for (let i = 0; i < allStars.length; i++) {

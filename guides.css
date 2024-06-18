@@ -1,20 +1,135 @@
 .website-links {
     display: flex;
     margin-left: 20px;
+    align-items: center;
 }
 
 .website-links ul {
     display: flex;
     margin-left: 20px;
+    height: 100%;
+    align-items: center;
 }
 
 .website-links li {
     margin-left: 25px;
     cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: 250ms;
 }
 
 @media screen and (max-width: 700px) {
     .website-links ul {
         display: none;
     }
+}
+
+.hover-content{
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background-color: white;
+    display: none;
+}
+
+.website-links li:hover + .phone-content{
+    display: block;
+}
+
+
+.phone-content{
+    width: 100px;
+    height: 200px;
+    background-color: rgb(220,220,220);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.phone-img{
+    width: 60%;
+    height: auto;
+}
+
+.title-img{
+    height: 50px;
+    width: auto;
+}
+
+.series-links-container{
+    position: absolute;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    background-color: red;
+    left: 10px;
+    bottom: 0px;
+}
+
+.all-links-container{
+    width: 220px;
+    left: 50% !important;
+}
+.all-links-container a{
+    color: rgb(40,40,40);
+    font-weight: 500;
+}
+
+.all-links-container:first-child{
+    background-color: rgb(211, 211, 211);
+    padding: 15px;
+    transition: 150ms;
+}
+.link-comparador:hover{
+    background-color: white;
+}
+
+.todos-link{
+    padding: 8px 25px;
+    border: solid 1px rgb(40,40,40);
+    border-radius: 20px;
+    transition: 150ms;
+}
+
+.todos-link:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+.series-links-container a{
+    color: rgb(147, 147, 147);
+    border-bottom: 1px solid rgb(147, 147, 147);
+    font-weight: 400;
+    transition: 150ms;
+}
+
+.series-links-container:hover{
+    color: rgb(40,40,40);
+    border-bottom: 1px solid rgb(40,40,40);
+}
+
+.form-submit-btn:hover{
+    background-color: #285F41 !important;
+}
+
+.blocks-item:hover{
+    background-color: #285F41;
+}
+
+.blocks-item:hover > a{
+    color: white;
+    text-decoration: none;
+}
+
+.header-inner {
+    position: absolute;
+    top: 30px;
+    left: 100px;
+}
+
+.header-inner a{
+    color: white;
+    font-size: 40px;
+    font-weight: 400;
 }
