@@ -2,18 +2,15 @@
 .question-container {
     width: 100%;
     height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .question-container h1 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .icon-content {
     display: flex;
-    margin-top: -20px;
+    margin-top: -10px;
 }
 
 .star-icon {
@@ -21,7 +18,7 @@
     height: 60px;
     opacity: 0.6;
     transition: 250ms;
-    scale: 0.8;
+    scale: 0.7;
     cursor: pointer;
 }
 
@@ -42,7 +39,6 @@
 .question0 {
     display: none;
 }
-
 
 .deleted-field {
     display: none;

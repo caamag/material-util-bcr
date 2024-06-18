@@ -37,9 +37,9 @@ if (currentURL.startsWith(linkForm)) {
         //definindo ícones
         let imgSource = '';
         if (title.startsWith('*')) {
-            imgSource = 'https://theme.zdassets.com/theme_assets/15904219/e5d7b437e9506d0474f1970f2c50774ae320ff7f.png';
+            imgSource = '';
         } else {
-            imgSource = 'https://theme.zdassets.com/theme_assets/15904219/e5d7b437e9506d0474f1970f2c50774ae320ff7f.png';
+            imgSource = '';
         }
 
         for (let j = 0; j < iconsLength; j++) {
@@ -207,20 +207,20 @@ if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/req
 const submitBrn = document.querySelector('.submit-btn');
 submitBrn.addEventListener('click', () => {
     const question0 = document.querySelector('.request_custom_fields_29374031228947')
-    .querySelector('input')
+        .querySelector('input')
 
     const question1 = document.querySelector('.request_custom_fields_29374139533459')
-    .querySelector('input')
+        .querySelector('input')
 
     const question2 = document.querySelector('.request_custom_fields_30052257745555')
-    .querySelector('input')
+        .querySelector('input')
 
     if (question0.value === '' && question1.value === '') {
         question0.value = '0'
         question1.value = '0'
-    }else if (question0.value === '') {
+    } else if (question0.value === '') {
         question0.value = '0'
-    }else if (question1.value === '') {
+    } else if (question1.value === '') {
         question1.value = '0'
     }
 
