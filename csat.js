@@ -1,239 +1,278 @@
 //Pesquisa de CSAT
-const linkForm = 'https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=24263091152283';
+const linkForm =
+  "https://centraldocliente.lg.com.br/hc/pt-br/requests/new?ticket_form_id=24263091152283";
 const currentURL = window.location.href;
 
 if (currentURL.startsWith(linkForm)) {
+  const formTitle = document.querySelector(".container h1");
+  formTitle.innerHTML = "Pesquisa de satisfação";
 
-    const formTitle = document.querySelector('.container h1');
-    formTitle.innerHTML = 'Pesquisa de satisfação';
+  const form = document.querySelector(".request-form");
+  const formLength = form.length - 8;
+  const labels = document.querySelectorAll(
+    "#new_request div:nth-child(n+7) label"
+  );
+  const selectedLengths = [0, 0, 0, 0];
 
-    const form = document.querySelector('.request-form');
-    const formLength = (form.length) - 8;
-    const labels = document.querySelectorAll('#new_request div:nth-child(n+7) label');
-    const selectedLengths = [0, 0, 0, 0];
+  for (let i = 0; i < formLength; i++) {
+    const question = document.createElement("div");
+    question.className = `question-container question${i}`;
+    var titleQuestion = document.createElement("h1");
+    titleQuestion.innerText = labels[i].innerText;
+    question.appendChild(titleQuestion);
 
-    for (let i = 0; i < formLength; i++) {
+    //icons
+    const icons = document.createElement("div");
+    icons.className = "icon-content";
+    question.appendChild(icons);
 
-        const question = document.createElement('div');
-        question.className = `question-container question${i}`
-        var titleQuestion = document.createElement('h1')
-        titleQuestion.innerText = labels[i].innerText;
-        question.appendChild(titleQuestion)
+    //number of icons
+    var title = titleQuestion.innerText.trim();
+    const regex = /\((\d+)\)/;
+    const match = title.match(regex);
 
-        //icons
-        const icons = document.createElement('div');
-        icons.className = 'icon-content';
-        question.appendChild(icons)
+    const maxIcons = 10;
+    let iconsLength = match ? parseInt(match[1], 10) : 5;
 
-        //number of icons
-        var title = titleQuestion.innerText.trim()
-        const regex = /\((\d+)\)/;
-        const match = title.match(regex)
+    iconsLength = Math.max(2, Math.min(maxIcons, iconsLength));
 
-        const maxIcons = 10;
-        let iconsLength = match ? parseInt(match[1], 10) : 5;
-
-        iconsLength = Math.max(2, Math.min(maxIcons, iconsLength));
-
-        //definindo ícones
-        let imgSource = '';
-        if (title.startsWith('*')) {
-            imgSource = '';
-        } else {
-            imgSource = '';
-        }
-
-        for (let j = 0; j < iconsLength; j++) {
-            const icon = document.createElement('img');
-            icon.className = `star-icon icon${i}`
-            icon.src = imgSource;
-            icon.addEventListener('click', () => { handleClick(icon, j, i) })
-            icons.appendChild(icon);
-        }
-        form.appendChild(question)
-
-        if ((i + 1) === formLength) {
-            const submitBtn = document.createElement('input');
-            submitBtn.setAttribute('type', 'submit');
-            submitBtn.setAttribute('name', 'commit');
-            submitBtn.setAttribute('value', 'Enviar avaliação');
-            submitBtn.className = 'submit-btn';
-            submitBtn.style.display = 'block';
-            submitBtn.style.marginTop = '40px';
-            form.appendChild(submitBtn)
-        }
+    //definindo ícones
+    let imgSource = "";
+    if (title.startsWith("*")) {
+      imgSource = "";
+    } else {
+      imgSource = "";
     }
 
-    const regexText = new RegExp("\\(" + "(TXT)" + "\\)")
-    const h2Textearea = document.querySelectorAll('h1');
+    for (let j = 0; j < iconsLength; j++) {
+      const icon = document.createElement("img");
+      icon.className = `star-icon icon${i}`;
+      icon.src = imgSource;
+      icon.addEventListener("click", () => {
+        handleClick(icon, j, i);
+      });
+      icons.appendChild(icon);
+    }
+    form.appendChild(question);
 
-    h2Textearea.forEach(text => {
-        if (regexText.test(text.innerText)) {
-            const questionWithTextArea = text.parentNode;
-            questionWithTextArea.style.flexDirection = 'column';
-            questionWithTextArea.style.marginBottom = '30px';
-            questionWithTextArea.style.alignItems = 'start';
-            const iconContent = questionWithTextArea.querySelectorAll('.icon-content');
+    if (i + 1 === formLength) {
+      const submitBtn = document.createElement("input");
+      submitBtn.setAttribute("type", "submit");
+      submitBtn.setAttribute("name", "commit");
+      submitBtn.setAttribute("value", "Enviar avaliação");
+      submitBtn.className = "submit-btn";
+      submitBtn.style.display = "block";
+      submitBtn.style.marginTop = "40px";
+      form.appendChild(submitBtn);
+    }
+  }
 
-            if (regexText.test(title)) {
-                const textWithoutTag = title.replace(regexText, `<span class='nps-tag'>$&</span>`);
-                titleQuestion.innerHTML = textWithoutTag;
-            }
+  const regexText = new RegExp("\\(" + "(TXT)" + "\\)");
+  const h2Textearea = document.querySelectorAll("h1");
 
-            iconContent.forEach(content => {
-                content.style.display = 'none';
-            })
-            const newTextarea = document.createElement('textarea');
-            newTextarea.classList.add('multilinha')
-            questionWithTextArea.appendChild(newTextarea)
-        }
-    })
+  h2Textearea.forEach((text) => {
+    if (regexText.test(text.innerText)) {
+      const questionWithTextArea = text.parentNode;
+      questionWithTextArea.style.flexDirection = "column";
+      questionWithTextArea.style.marginBottom = "30px";
+      questionWithTextArea.style.alignItems = "start";
+      const iconContent =
+        questionWithTextArea.querySelectorAll(".icon-content");
 
-    //preenchendo conteúdo do campo de texto
-    const formZendeskFields = document.querySelectorAll('.form-field');
-    const zendeskFields = Array.from(formZendeskFields);
-    let zendeskFieldsFilter = zendeskFields.slice(4);
-    zendeskFieldsFilter.pop();
+      if (regexText.test(title)) {
+        const textWithoutTag = title.replace(
+          regexText,
+          `<span class='nps-tag'>$&</span>`
+        );
+        titleQuestion.innerHTML = textWithoutTag;
+      }
 
-    zendeskFieldsFilter.forEach(field => {
-        const index = zendeskFieldsFilter.indexOf(field);
-        field.classList.add(`question${index}`)
+      iconContent.forEach((content) => {
+        content.style.display = "none";
+      });
+      const newTextarea = document.createElement("textarea");
+      newTextarea.classList.add("multilinha");
+      questionWithTextArea.appendChild(newTextarea);
+    }
+  });
+
+  //preenchendo conteúdo do campo de texto
+  const formZendeskFields = document.querySelectorAll(".form-field");
+  const zendeskFields = Array.from(formZendeskFields);
+  let zendeskFieldsFilter = zendeskFields.slice(4);
+  zendeskFieldsFilter.pop();
+
+  zendeskFieldsFilter.forEach((field) => {
+    const index = zendeskFieldsFilter.indexOf(field);
+    field.classList.add(`question${index}`);
+  });
+
+  formZendeskFields.forEach((field) => {
+    field.classList.add("deleted-field");
+  });
+
+  const textareaFields = document.querySelectorAll(".multilinha");
+  textareaFields.forEach((field) => {
+    const classQuestion = field.parentNode.classList[1];
+    const indexQuestion = classQuestion[classQuestion.length - 1];
+
+    field.addEventListener("input", () => {
+      if (
+        field.parentNode.classList[1] ===
+        zendeskFieldsFilter[indexQuestion].classList[4]
+      ) {
+        zendeskFieldsFilter[indexQuestion].querySelector("input").value =
+          field.value;
+        field.classList.remove(".delete-field");
+      }
     });
 
-    formZendeskFields.forEach(field => {
-        field.classList.add('deleted-field')
-    })
+    const footerForm = document.querySelector(".request-form footer");
+    footerForm.style.display = "none";
+  });
 
-    const textareaFields = document.querySelectorAll('.multilinha');
-    textareaFields.forEach(field => {
-        const classQuestion = field.parentNode.classList[1];
-        const indexQuestion = classQuestion[classQuestion.length - 1]
-
-        field.addEventListener('input', () => {
-            if (field.parentNode.classList[1] === zendeskFieldsFilter[indexQuestion].classList[4]) {
-                zendeskFieldsFilter[indexQuestion].querySelector('input').value = field.value
-                field.classList.remove('.delete-field')
-            }
-        })
-
-        const footerForm = document.querySelector('.request-form footer');
-        footerForm.style.display = 'none';
-    })
-
-
-    const apiUrl = 'https://centraldocliente.lg.com.br/api/v2/ticket_forms'
-    const campos = [];
-    async function getFields() {
-        const res = await fetch(apiUrl)
-        const data = await res.json()
-        const forms = data.ticket_forms;
-        const csatForm = forms.filter(form => form.name === 'Formulário de CSAT');
-        let sliceNumber = 6;
-        if (csatForm[0].ticket_field_ids.length < 12) {
-            sliceNumber = 2;
-        }
-        const IDs = csatForm[0].ticket_field_ids.slice(sliceNumber);
-
-        for (let f = 0; f < IDs.length; f++) {
-            const el = document.querySelector(`.request_custom_fields_${IDs[f]}`)
-            if (el.classList.contains('string')) {
-                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} input`))
-            } else if (el.classList.contains('text')) {
-                campos.push(document.querySelector(`.request_custom_fields_${IDs[f]} textarea`))
-            }
-        }
+  const apiUrl = "https://centraldocliente.lg.com.br/api/v2/ticket_forms";
+  const campos = [];
+  async function getFields() {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+    const forms = data.ticket_forms;
+    const csatForm = forms.filter((form) => form.name === "Formulário de CSAT");
+    let sliceNumber = 6;
+    if (csatForm[0].ticket_field_ids.length < 12) {
+      sliceNumber = 2;
     }
-    getFields()
+    const IDs = csatForm[0].ticket_field_ids.slice(sliceNumber);
 
+    for (let f = 0; f < IDs.length; f++) {
+      const el = document.querySelector(`.request_custom_fields_${IDs[f]}`);
+      if (el.classList.contains("string")) {
+        campos.push(
+          document.querySelector(`.request_custom_fields_${IDs[f]} input`)
+        );
+      } else if (el.classList.contains("text")) {
+        campos.push(
+          document.querySelector(`.request_custom_fields_${IDs[f]} textarea`)
+        );
+      }
+    }
+  }
+  getFields();
 
-    function handleClick(star, index, questionIndex) {
-        const allStars = star.parentNode.querySelectorAll('.star-icon');
+  function handleClick(star, index, questionIndex) {
+    const allStars = star.parentNode.querySelectorAll(".star-icon");
 
-        selectedLengths[questionIndex] = index + 1;
+    selectedLengths[questionIndex] = index + 1;
 
-        for (let i = 0; i < allStars.length; i++) {
-            if (i <= index) {
-                allStars[i].classList.add('selected');
-                allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/ec8f628882d88500dd00a82f7ef5313585e49fa4.png'
-            } else {
-                allStars[i].classList.remove('selected');
-                allStars[i].src = 'https://theme.zdassets.com/theme_assets/15904219/d4cb6311f25109edeaaba3b334851438a16668ee.png'
-            }
-        }
-        campos[questionIndex].value = selectedLengths[questionIndex];
+    for (let i = 0; i < allStars.length; i++) {
+      if (i <= index) {
+        allStars[i].classList.add("selected");
+        allStars[i].src =
+          "https://theme.zdassets.com/theme_assets/15904219/ec8f628882d88500dd00a82f7ef5313585e49fa4.png";
+      } else {
+        allStars[i].classList.remove("selected");
+        allStars[i].src =
+          "https://theme.zdassets.com/theme_assets/15904219/d4cb6311f25109edeaaba3b334851438a16668ee.png";
+      }
+    }
+    campos[questionIndex].value = selectedLengths[questionIndex];
+  }
+
+  //garantindo nota máxima
+  form.addEventListener("submit", () => {
+    zendeskFieldsFilter.forEach((field) => {
+      if (
+        field.querySelector("input").value > 5 &&
+        !field.classList.contains("question0")
+      ) {
+        field.querySelector("input").value = 5;
+      }
+    });
+  });
+}
+
+if (
+  window.location.href ===
+  "https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new"
+) {
+  const optionContainer = document.querySelector(".options-container");
+  const options = document.querySelector(".options");
+  let isRendered = false;
+
+  optionContainer.addEventListener("click", async () => {
+    if (isRendered) {
+      options.innerHTML = "";
+      isRendered = false;
+      return;
     }
 
-    //garantindo nota máxima
-    form.addEventListener('submit', () => {
-        zendeskFieldsFilter.forEach(field => {
-            if (field.querySelector('input').value > 5 && !field.classList.contains('question0')) {
-                field.querySelector('input').value = 5;
-            }
-        })
-    })
-};
+    const res = await fetch("/api/v2/ticket_forms");
+    const data = await res.json();
+    const forms = data.ticket_forms.filter(
+      (form) =>
+        form.restricted_brand_ids.includes(27109490332819) &&
+        form.id !== 29831660997779
+    );
 
-if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new') {
-    const optionContainer = document.querySelector('.options-container');
-    const options = document.querySelector('.options');
-    let isRendered = false;
-
-    optionContainer.addEventListener('click', async () => {
-        if (isRendered) {
-            options.innerHTML = '';
-            isRendered = false;
-            return;
-        }
-
-        const res = await fetch('/api/v2/ticket_forms');
-        const data = await res.json()
-        const forms = data.ticket_forms.filter(form => form.restricted_brand_ids.includes(27109490332819)
-            && form.id !== 29831660997779);
-
-        forms.map(form => {
-            let content = `
+    forms.map((form) => {
+      let content = `
                 <a href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=${form.id}" 
                 class="option-name" target='blank'>
                     ${form.display_name}
                 </a><br><br>
             `;
-            options.insertAdjacentHTML('afterbegin', content);
-        })
-        isRendered = true;
-    })
-    const defaultField = document.querySelector('.form-field')
-    defaultField.style.display = 'none'
+      options.insertAdjacentHTML("afterbegin", content);
+    });
+    isRendered = true;
+  });
+  const defaultField = document.querySelector(".form-field");
+  defaultField.style.display = "none";
 }
 
+if (
+  window.location.href ===
+  "https://centraldocliente.lg.com.br/hc/pt-br/requests"
+) {
+  const avaliacaoGeral = document.querySelector(
+    ".request_custom_fields_24263396283163 input"
+  );
 
-const submitBrn = document.querySelector('.submit-btn');
-submitBrn.addEventListener('click', () => {
-    const question0 = document.querySelector('.request_custom_fields_29374031228947')
-        .querySelector('input')
+  const conhecimentoConsultor = document.querySelector(
+    ".request_custom_fields_24263400713883 input"
+  );
 
-    const question1 = document.querySelector('.request_custom_fields_29374139533459')
-        .querySelector('input')
+  const cordialidade = document.querySelector(
+    ".request_custom_fields_24263617572763 input"
+  );
 
-    const question2 = document.querySelector('.request_custom_fields_30052257745555')
-        .querySelector('input')
+  const tempo = document.querySelector(
+    ".request_custom_fields_24263426386971 input"
+  );
 
-    if (question0.value === '' && question1.value === '') {
-        question0.value = '0'
-        question1.value = '0'
-    } else if (question0.value === '') {
-        question0.value = '0'
-    } else if (question1.value === '') {
-        question1.value = '0'
-    }
+  if (avaliacaoGeral.value > 5) {
+    avaliacaoGeral.value === 5;
+  }
 
-    if (question2.value === '') {
-        question2.value = 'Cliente não fez nenhum comentário'
-    }
-})
+  if (conhecimentoConsultor.value > 5) {
+    conhecimentoConsultor.value = 5;
+  }
 
-const formFields = document.querySelectorAll('.form-field');
-formFields.forEach(field => {
-    if (field.querySelector('.upload-dropzone')) {
-        field.style.display = 'none'
-    }
-})
+  if (cordialidade.value > 5) {
+    cordialidade.value = 5;
+  }
+
+  if (tempo.value > 5) {
+    tempo.value = 5;
+  }
+
+  const ccField = (document.querySelector(".request_cc_emails").style.display =
+    "none");
+  const description = (document.querySelector(
+    ".request_description"
+  ).style.display = "none");
+  const subject = (document.querySelector(".request_subject").style.display =
+    "none");
+
+  const formTitle = document.querySelector(".container h1");
+  formTitle.innerHTML = `Pesquisa de satisfação <br><p class='subtitle'>Preencha todas as notas</p>`;
+}
