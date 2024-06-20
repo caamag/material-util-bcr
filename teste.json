@@ -1,9 +1,11 @@
 {
     "ticket": {
         "comment": {
-            "public": false,
-            "html_body": "ATENÇÃO<br>Cliente não está satisfeito com a resolução deste ticket.<br><br>Motivo: {{ticket.ticket_field_29763416380179}}<br><br>Comentário do cliente: {{ticket.ticket_field_30302490651283}}."
+            "public": false
         },
-        "status": "open"
+        "status": "open",
+        "tags": [
+            "ticket-bot-lacoste-br"
+        ]
     }
 }

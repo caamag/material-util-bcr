@@ -8,63 +8,6 @@
 
 <body>
 
-    <!--Código para verificação se usuário logado ou não-->
-
-    {{#unless signed_in}}
-    <!--Aqui será inserido o código html desejado-->
-    <li>
-        {{#link "sign_in" class="sign-in"}}
-        {{t 'sign_in'}}
-        {{/link}}
-    </li>
-    {{/unless}}
-
-    <!--Restrição de forms-->
-    <div class="form-field select optional option-form">
-        <p>Do que se trata a sua necessidade?</p>
-        <div class="options-container">-</div>
-        <div class="options"></div>
-    </div>
-
-    <a href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29763329852179&tf_29035220664979={{ticket.id}}"
-        style="margin-left:10px;margin-right:10px;text-decoration:none;color:white;background-color:red;padding:10px;">Não</a>
-
-
-    <section class="hover-content phones-section">
-        <div class="phone-content">
-            <a href="https://www.oppo.com/br/smartphones/series-reno/reno11-f/"><img src={{asset 'Reno11-img.png'}} alt="" class="phone-img"></a>
-            <img src={{asset 'Reno11-title.png'}} alt="" class="title-img">
-        </div>
-
-        <div class="phone-content">
-            <a href=""><img src={{asset 'Reno11-img.png'}} alt="" class="phone-img"></a>
-            <img src={{asset 'Reno11-title.png'}} alt="" class="title-img">
-        </div>
-
-        <div class="phone-content">
-            <a href=""><img src={{asset 'Reno11-img.png'}} alt="" class="phone-img"></a>
-            <img src={{asset 'Reno11-title.png'}} alt="" class="title-img">
-        </div>
-
-        <div class="series-links-container">
-            <a href="https://www.oppo.com/br/smartphones/?tab2">A series</a>
-            <a href="https://www.oppo.com/br/smartphones/?tab=reno-series">Reno series</a>
-        </div>
-
-        <div class="all-links-container">
-            <a href="https://www.oppo.com/br/compare/">Comparador</a>
-            <a href="https://www.oppo.com/br/smartphones/">Todos os celulares</a>
-        </div>
-    </section>
-
-
-    <form class='teste-form'>
-
-<input type='text' class='teste-input'/>
-  
-  <button type='submit'>enviar</button>
-</form>
-
 </body>
 
 </html>
