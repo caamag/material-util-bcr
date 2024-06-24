@@ -227,8 +227,17 @@
     .header-inner {
         left: 150px;
     }
+
+    [dir=ltr] .search input[type=search] {
+        padding-left: 60px;
+    }
 }
 
 #description {
-    padding-bottom: 50px;
+    min-height: 200px;
+}
+
+#number-purchase,
+.number-purchase-span {
+    display: none;
 }

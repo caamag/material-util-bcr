@@ -8,13 +8,26 @@
 
 <body>
 
+    <span class="purchase-location-span">Onde a compra foi feita?</span>
+    <select id="purchase-location">
+        <option selected>-</option>
+        <option value="site_oficial_da_lacoste">Site oficial Lacoste</option>
+        <option value="marketplace">Marketplace</option>
+        <option value="boutique_lacoste">Boutique Lacoste</option>
+        <option value="multimarca">Multimarca</option>
+    </select>
 
-    <div style="display: flex;">
-        <a href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29035139635219&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email={{ticket.requester.email}}&tf_29035220664979={{ticket.id}}"
-            style="color: black;text-decoration: none;">Sim</a>
-        <a
-            href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29763329852179&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email={{ticket.requester.email}}&tf_29035220664979={{ticket.id}}">Não</a>
-    </div>
+    <span class="who-make-purchase-span">A compra foi feita por você?</span>
+    <select id="who-make-purchase">
+        <option selected>-</option>
+        <option value="sim__fui_eu_que_fiz_a_compra_">Sim, fui eu que fiz a compra</option>
+        <option value="não__eu_ganhei_de_presente_">Não, ganhei de presente</option>
+        <option value="não__mas_sou_parente_de_quem_fez_a_compra">Não, mas sou parente de quem fez a compra</option>
+    </select>
+
+    <span class="purchase-number-span" style="display: none;">Número do pedido</span>
+    <input type="text" id="purchase-number" placeholder="Inserir o número do pedido:" style="display: none;">
+
 </body>
 
 </html>
