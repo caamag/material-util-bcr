@@ -1,11 +1,7 @@
 
 const url = 'https://lacostebrazil.zendesk.com/api/v2/requests.json'
 
-const customFields = [
-    {id: 27333159915411, value: 'quero_falar_sobre_um_pedido'}
-];
-
-async function criarTicketZendeskOrder () {
+async function criarTicketZendeskOrder() {
     const ticketData = {
         request: {
             subject: 'Dúvida sobre: pedido',
@@ -18,6 +14,16 @@ async function criarTicketZendeskOrder () {
             },
             tags: [
                 'form_guide_brasil'
+            ],
+            custom_fields: [
+                {
+                    id: 27333799571347,
+                    value: '123456789'
+                },
+                {
+                    id: 27333882092179,
+                    value: 'site_oficial_da_lacoste',
+                }
             ]
         }
     }
@@ -32,12 +38,10 @@ async function criarTicketZendeskOrder () {
         })
         const data = await response.json()
         console.log(data);
-        showToast('Ticket criado com sucesso');
         if (!response.ok) {
-            throw new Error(response.status)
+            console.log(response.statusText);
         }
     } catch (error) {
-        showToast('Erro ao criar o ticket');
         console.log(error.message);
     }
 }
