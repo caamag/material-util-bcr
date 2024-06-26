@@ -17,6 +17,11 @@ function limparCamposZendesk() {
     purchaseItem.value = ''
     marketShop.value = ''
     brandInput.value = ''
+    reasonDevolutionInput.value = ''
+    productDefect.value = ''
+    document.querySelector('#name-purchase').value = ''
+    document.querySelector('#email-purchase').value = ''
+    document.querySelector('#description').value = ''
 }
 
 const purchaseLocation = document.querySelector('#purchase-location')
@@ -31,6 +36,10 @@ const purchaseDetailsSpan = document.querySelector('.purchaseDetails-span')
 const purchaseDetails = document.querySelector('#purchaseDetails')
 const purchaseItemSpan = document.querySelector('.purchaseItem-span')
 const purchaseItem = document.querySelector('#purchaseItem')
+
+//REASON DEVOLUTION
+const reasonDevolutionSpan = document.querySelector('.reasonDevolution-span');
+const reasonDevolutionInput = document.querySelector('#reasonDevolution')
 
 //PRODUCT DEFECT
 //VESTUÁRIO
@@ -94,6 +103,14 @@ whoMakePurchase.addEventListener('change', () => {
         hideElements([
             purchaseDetails, purchaseDetailsSpan
         ])
+    }
+})
+
+purchaseDetails.addEventListener('change', () => {
+    if (purchaseDetails.value === 'quero_devolver_meu_pedido') {
+        showElements([reasonDevolutionInput, reasonDevolutionSpan])
+    }else{
+        hideElements([reasonDevolutionInput, reasonDevolutionSpan])
     }
 })
 
@@ -168,6 +185,10 @@ async function criarTicketZendeskOrder() {
                     value: purchaseDetails.value
                 },
                 {
+                    id: 27369985716883,
+                    value: reasonDevolutionInput.value
+                },
+                {
                     id: 27382123663251,
                     value: purchaseItem.value
                 },
@@ -205,9 +226,18 @@ async function criarTicketZendeskOrder() {
 
 const form = document.querySelector('.request-form')
 const othersField = form.querySelector('.request_custom_fields_27345830251923')
-form.prepend(othersField)
+if (othersField) form.prepend(othersField)
 
 //colocando campo "De onde você é?" para o segundo lugar na hierarquia do form
 const whereDoYouFromField = document.querySelector('.request_custom_fields_27345952143123')
 const secondSunForm = form.children[1]
-form.insertBefore(whereDoYouFromField, secondSunForm)
+if (whereDoYouFromField) form.insertBefore(whereDoYouFromField, secondSunForm)
+
+const idField = document.querySelector('.request_custom_fields_29035220664979')
+if (idField) idField.style.display = 'none'
+
+const descriptionField = document.querySelector('.request_description')
+if (descriptionField) descriptionField.style.display = 'none'
+
+const searchIcon = document.querySelector('.search-icon')
+if (searchIcon) searchIcon.style.display = 'none'

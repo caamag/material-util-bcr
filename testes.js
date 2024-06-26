@@ -48,4 +48,13 @@ async function criarTicketZendeskOrder() {
 
 criarTicketZendeskOrder()
 
+function limparCampos() {
+    document.querySelector('#name-purchase').value = ''
+    document.querySelector('#email-purchase').value = ''
+    document.querySelector('#description').value = ''
+    document.querySelector('.purchase-location').value = ''
+}
+
+
+const tiendaFisicaInput = document.querySelector('#purchase-boutique')
 //erro atual na linha 1322 no js do guide
