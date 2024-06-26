@@ -32,6 +32,17 @@ const purchaseDetails = document.querySelector('#purchaseDetails')
 const purchaseItemSpan = document.querySelector('.purchaseItem-span')
 const purchaseItem = document.querySelector('#purchaseItem')
 
+//PRODUCT DEFECT
+//VESTUÁRIO
+const productDefectSpan = document.querySelector('.productDefect-span')
+const productDefect = document.querySelector('#productDefect')
+//CALÇADO
+const calcadoSpan = document.querySelector('.calcado-span')
+const calcadoInput = document.querySelector('#calcado')
+//ACESSÓRIO
+const acessorioSpan = document.querySelector('.acessorio-span')
+const acessorioInput = document.querySelector('#acessorio')
+
 //MARKETPLACE FIELD
 const marketShopSpan = document.querySelector('.marketplace-shop-span')
 const marketShop = document.querySelector('#marketplace-shop')
@@ -82,6 +93,25 @@ whoMakePurchase.addEventListener('change', () => {
     } else {
         hideElements([
             purchaseDetails, purchaseDetailsSpan
+        ])
+    }
+})
+
+purchaseItem.addEventListener('change', () => {
+    if (purchaseItem.value === 'vestuário') {
+        showElements([productDefect, productDefectSpan])
+        hideElements([
+            calcadoInput, calcadoSpan, acessorioSpan, acessorioInput
+        ])
+    }else if (purchaseItem.value === 'calçado') {
+        showElements([calcadoInput, calcadoSpan])
+        hideElements([
+            productDefect, productDefectSpan, acessorioSpan, acessorioInput
+        ])
+    }else if (purchaseItem.value === 'acessório') {
+        showElements([acessorioSpan, acessorioInput])
+        hideElements([
+            productDefect, productDefectSpan, calcadoInput, calcadoSpan
         ])
     }
 })
@@ -141,6 +171,18 @@ async function criarTicketZendeskOrder() {
                     id: 27382123663251,
                     value: purchaseItem.value
                 },
+                {
+                    id: 30524686901523,
+                    value: productDefect.value
+                },
+                {
+                    id: 30545218221971,
+                    value: calcadoInput.value
+                },
+                {
+                    id: 30549785563155,
+                    value: acessorioInput.value
+                }
             ]
         }
     };
@@ -161,3 +203,11 @@ async function criarTicketZendeskOrder() {
 }
 
 
+const form = document.querySelector('.request-form')
+const othersField = form.querySelector('.request_custom_fields_27345830251923')
+form.prepend(othersField)
+
+//colocando campo "De onde você é?" para o segundo lugar na hierarquia do form
+const whereDoYouFromField = document.querySelector('.request_custom_fields_27345952143123')
+const secondSunForm = form.children[1]
+form.insertBefore(whereDoYouFromField, secondSunForm)
