@@ -1,60 +1,74 @@
 
 const url = 'https://lacostebrazil.zendesk.com/api/v2/requests.json'
 
-async function criarTicketZendeskOrder() {
-    const ticketData = {
+async function createRequests() {
+
+    const payloadTicket = {
         request: {
-            subject: 'Dúvida sobre: pedido',
+            subject: 'Hablar sobre la orden',
             comment: {
-                body: 'Ticket criado por api'
+                body: 'Teste de criação de ticket'
             },
             requester: {
                 email: 'caiolopesfv@gmail.com',
-                name: 'Caio Lopes'
+                name: 'Caio'
             },
             tags: [
-                'form_guide_brasil'
+                'teste_interno'
             ],
-            custom_fields: [
+            fields: [
                 {
-                    id: 27333799571347,
-                    value: '123456789'
-                },
-                {
-                    id: 27333882092179,
-                    value: 'site_oficial_da_lacoste',
+                    id: 28361907533075,
+                    value: 'estado_del_pedido'
                 }
             ]
         }
     }
 
     try {
-        const response = await fetch(url, {
+        const res = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(ticketData)
+            body: JSON.stringify(payloadTicket)
         })
-        const data = await response.json()
-        console.log(data);
-        if (!response.ok) {
-            console.log(response.statusText);
-        }
+
+        const data = await res.json()
+        console.log(data.request);
     } catch (error) {
         console.log(error.message);
     }
 }
 
-criarTicketZendeskOrder()
+createRequests()
 
-function limparCampos() {
-    document.querySelector('#name-purchase').value = ''
-    document.querySelector('#email-purchase').value = ''
-    document.querySelector('#description').value = ''
-    document.querySelector('.purchase-location').value = ''
+
+//ajustando formulário de negativa de ticket
+if (window.location.href === 'https://lacoste-argentina.zendesk.com/hc/pt-br/requests/new?ticket_form_id=30425996426003') {
+    const subject = document.querySelector('.request_subject')
+    subject.style.display = 'none'
+
+    const description = document.querySelector('.request_description');
+    description.style.display = 'none'
+
+    const ticketIDField = document.querySelector('.request_custom_fields_29035220664979')
+    ticketIDField.style.display = 'none'
+
+    const title = document.querySelector('h1')
+    title.style.textAlign = 'center'
+    title.innerText = 'Enviar Solicitación'
+
+    const hero = document.querySelector('.hero')
+    hero.style.display = 'none'
+
+    const selectedForm = document.querySelector('.request_ticket_form_id')
+    selectedForm.style.display = 'none'
+
+    const fields = document.querySelectorAll('.form-field')
+    fields.forEach(field => {
+        if (field.querySelector('.upload-dropzone')) {
+            field.style.display = 'none'
+        }
+    })
 }
-
-
-const tiendaFisicaInput = document.querySelector('#purchase-boutique')
-//erro atual na linha 1322 no js do guide
