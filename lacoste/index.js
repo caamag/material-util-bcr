@@ -461,3 +461,15 @@ sendTicketButton3.addEventListener('click', sendTicketBoutiques);
 window.addEventListener('load', () => {
     window.scrollTo(0, 0)
 })
+
+
+//alterando texto de pop-up de envio de formulário.
+function changePopupMessage () {
+    const popUp = document.querySelector('[data-test-id="notification"]')
+    if (popUp) {
+        const popUpText = popUp.querySelector('strong')
+        popUpText.innerText = 'Su solicitd fue enviada enviada con éxito'
+    }
+}
+
+changePopupMessage();
