@@ -60,6 +60,10 @@ const marketShop = document.querySelector('#marketplace-shop')
 const brandsSpan = document.querySelector('.brands-span')
 const brandInput = document.querySelector('#brands')
 
+//EANs FIELD
+const EANsSpan = document.querySelector('.EANs-text-span')
+const EANsField = document.querySelector('#EANs-tex');
+
 //PURCHASETITLE
 const purchaseNumberTitle = document.querySelector('.purchase-number-span')
 let spanText = 'Número do pedido'
@@ -119,6 +123,20 @@ purchaseDetails.addEventListener('change', () => {
         showElements([reasonDevolutionInput, reasonDevolutionSpan])
     }else{
         hideElements([reasonDevolutionInput, reasonDevolutionSpan])
+    }
+
+    if (purchaseDetails.value === 'meu_pedido_está_com_defeito') {
+        showElements([purchaseItem, purchaseItemSpan])
+    }else{
+        hideElements([purchaseItem, purchaseItemSpan])
+    }
+
+    if (purchaseDetails.value === 'quero_devolver_meu_pedido' ||
+        purchaseDetails.value === 'devolvi_meu_pedido_e_não_recebi_o_estorno'
+    ) {
+        showElements([EANsField, EANsSpan])
+    }else{
+        hideElements([EANsField, EANsSpan])
     }
 })
 
@@ -211,6 +229,10 @@ async function criarTicketZendeskOrder() {
                 {
                     id: 30549785563155,
                     value: acessorioInput.value
+                },
+                {
+                    id: 30899851718675,
+                    value: EANsField.value
                 }
             ]
         }
