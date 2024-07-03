@@ -473,3 +473,17 @@ function changePopupMessage () {
 }
 
 changePopupMessage();
+
+//scroll da tela na página inicial
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        if (window.location.href === 'https://lacostebrazil.zendesk.com/hc/pt-br') {
+            window.scrollTo(0, 300)
+        }
+    }, 150)
+})
+
+window.addEventListener('scroll', (e) => {
+    console.log(e);
+    console.log(e.target);
+})

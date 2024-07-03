@@ -60,6 +60,11 @@ const marketShop = document.querySelector('#marketplace-shop')
 const brandsSpan = document.querySelector('.brands-span')
 const brandInput = document.querySelector('#brands')
 
+//PURCHASETITLE
+const purchaseNumberTitle = document.querySelector('.purchase-number-span')
+let spanText = 'Número do pedido'
+purchaseDetails.innerHTML = spanText
+
 purchaseLocation.addEventListener('change', () => {
     if (purchaseLocation.value === 'site_oficial_da_lacoste') {
         showElements([
@@ -69,6 +74,9 @@ purchaseLocation.addEventListener('change', () => {
         hideElements([
             marketShop, marketShopSpan, purchaseItemSpan, purchaseItem, brandInput, brandsSpan
         ])
+
+        purchaseDetails.textContent = 'Número do pedido (opicional)'
+
     } else if (purchaseLocation.value === 'marketplace') {
         showElements([
             purchaseNumber, purchaseNumberSpan, marketShopSpan, marketShop, purchaseItemSpan, purchaseItem
