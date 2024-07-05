@@ -78,3 +78,17 @@
     transition: background-color 0.2s, border-color 0.2s;
     margin-bottom: 10px;
 }
+
+@media screen and (max-width: 600px) {
+    .nps-container {
+        flex-direction: row;
+    }
+
+    .nps-icon {
+        width: 20px !important;
+        height: 20px !important;
+        margin-bottom: 5px !important;
+        margin-top: 5px !important;
+        font-size: 14px !important;
+    }
+}
