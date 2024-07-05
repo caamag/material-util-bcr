@@ -121,21 +121,21 @@ whoMakePurchase.addEventListener('change', () => {
 purchaseDetails.addEventListener('change', () => {
     if (purchaseDetails.value === 'quero_devolver_meu_pedido') {
         showElements([reasonDevolutionInput, reasonDevolutionSpan])
-    }else{
+    } else {
         hideElements([reasonDevolutionInput, reasonDevolutionSpan])
     }
 
     if (purchaseDetails.value === 'meu_pedido_está_com_defeito') {
         showElements([purchaseItem, purchaseItemSpan])
-    }else{
-        hideElements([purchaseItem, purchaseItemSpan])
+    } else {
+        hideElements([purchaseItem, purchaseItemSpan, productDefect, productDefectSpan])
     }
 
     if (purchaseDetails.value === 'quero_devolver_meu_pedido' ||
         purchaseDetails.value === 'devolvi_meu_pedido_e_não_recebi_o_estorno'
     ) {
         showElements([EANsField, EANsSpan])
-    }else{
+    } else {
         hideElements([EANsField, EANsSpan])
     }
 })
@@ -146,12 +146,12 @@ purchaseItem.addEventListener('change', () => {
         hideElements([
             calcadoInput, calcadoSpan, acessorioSpan, acessorioInput
         ])
-    }else if (purchaseItem.value === 'calçado') {
+    } else if (purchaseItem.value === 'calçado') {
         showElements([calcadoInput, calcadoSpan])
         hideElements([
             productDefect, productDefectSpan, acessorioSpan, acessorioInput
         ])
-    }else if (purchaseItem.value === 'acessório') {
+    } else if (purchaseItem.value === 'acessório') {
         showElements([acessorioSpan, acessorioInput])
         hideElements([
             productDefect, productDefectSpan, calcadoInput, calcadoSpan
