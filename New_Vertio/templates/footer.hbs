@@ -1,25 +1,28 @@
 <footer class="footer">
-  <div class="footer-inner">
-    {{#link 'help_center'}}{{help_center.name}}{{/link}}
+  <div class="footer-content">
+    <div class="redes">
+      <a href="" class="redes-icon">
+        <img src={{asset 'instagram.png' }}>
+      </a>
 
-    <div class="footer-language-selector">
-      {{#if alternative_locales}}
-        <div class="dropdown language-selector">
-          <button class="dropdown-toggle" aria-haspopup="true">
-            {{current_locale.name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </button>
-          <span class="dropdown-menu dropdown-menu-end" role="menu">
-            {{#each alternative_locales}}
-              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
-                {{name}}
-              </a>
-            {{/each}}
-          </span>
-        </div>
-      {{/if}}
+      <a href="" class="redes-icon">
+        <img src={{asset 'facebook.png' }}>
+      </a>
+
+      <a href="" class="redes-icon">
+        <img src={{asset 'twiter.png' }}>
+      </a>
+
+      <a href="" class="redes-icon">
+        <img src={{asset 'youtube.png' }}>
+      </a>
     </div>
+
+    <p>© 2024 SOLIS DISTRIBUIDORA DE PRODUTOS PARA SAÚDE, SERVIÇOS COMERCIAIS E LOGISTICA
+      LTDA | FARMÁCIA NATURAL SER BY HERBARIUM<br> CNPJ: 06.317.222/0003-80 | IE: 90344730-37 |
+      Avenida Santos Dumont Nº 1100 | CEP: 83403-500 | Colombo – Paraná Farmacêutica
+      Responsável: Quele Beatriz Nunes | CRF/PR – 27.071 | Autorização MS: 0.44894.4
+      Telefone: (41) 2104-5573 | Horário de funcionamento da loja física: Segunda a
+      sexta-feira, das 13h30 às 16h30.</p>
   </div>
 </footer>
