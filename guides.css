@@ -111,3 +111,13 @@
 .kMVBGT {
     width: 250px;
 }
+
+.form {
+    margin: 0 auto !important;
+}
+
+.csat-popup img {
+    width: 30px;
+    height: 30px;
+    visibility: hidden;
+}
