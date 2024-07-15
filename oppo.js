@@ -220,8 +220,37 @@ getCSATForms()
           
             const othersContent = document.querySelector("#others-content");
             othersContent.addEventListener("input", () => {
-									othersDefaultField.querySelector('input').value = othersContent.value;
-                  console.log(othersDefaultField.querySelector('input').value);
+				othersDefaultField.querySelector('input').value = othersContent.value;
+                console.log(othersDefaultField.querySelector('input').value);
             })
         }
     })
+
+
+
+(function() {
+    const originalConsoleError = console.error;
+    console.error = function(...args) {
+        originalConsoleError.apply(console, args);
+        window.location.reload();
+    };
+    
+    window.addEventListener('error', function(event) {
+        console.error(event.message);
+    });
+    
+    window.addEventListener('unhandledrejection', function(event) {
+        console.error(event.reason);
+    });
+    })();
+      
+
+
+const currentUrl = window.location.href;
+const baseUrl = 'https://oppo-do-brasil.zendesk.com/hc/pt-br';
+if (currentUrl === baseUrl || /https:\/\/oppo-do-brasil\.zendesk\.com\/hc\/pt-br\/requests\/\d+/.test(currentUrl)
+    || currentUrl === 'https://oppo-do-brasil.zendesk.com/hc/pt-br?return_to=%2Fhc%2Frequests') {
+
+        window.location.href = 'https://www.oppo.com/br/';
+        
+}

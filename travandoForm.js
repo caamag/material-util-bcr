@@ -19,3 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 })
+
+if (/https:\/\/oppo-do-brasil\.zendesk\.com\/hc\/pt-br\/requests\/\d+/.test(window.location.href)) {
+    window.location.href = 'https://centraldocliente.lg.com.br/hc/pt-br'
+}
