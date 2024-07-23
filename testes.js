@@ -1,5 +1,5 @@
 
-async function verifyTicket () {
+async function verifyTicket() {
     const res = await fetch('/api/v2/tickets/322');
     const data = await res.json();
 
