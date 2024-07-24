@@ -1,0 +1,34 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AASLR</title>
+</head>
+
+<header class="header">
+    {{#link "sign_in" class="sign-in"}}
+    {{t 'sign_in'}}
+    {{/link}}
+
+    <h1>Solicitação de serviços</h1>
+
+    <a href="https://solicita.rivierasl.com.br/hc/pt-br">
+        <img src={{asset 'Logo.png' }} alt="" class="logo-header">
+    </a>
+</header>
+
+<body>
+    <div class="container">
+        <img src={{asset 'Logo.png' }} alt="" class="logo-home">
+        <h4>ASSOCIAÇÃO DOS AMIGOS DA</h4>
+        <img src={{asset 'logo-name.png' }} alt="" class="logo-name">
+
+        <a href="https://solicita.rivierasl.com.br/hc/pt-br/requests/new" target="_blank" class="submit-request">
+            <img src={{asset 'e-mail.png' }} alt="" class="email-icon"><br>
+            Enviar Soicitação
+        </a>
+    </div>
+</body>
+
+</html>
