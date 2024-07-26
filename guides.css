@@ -12,3 +12,46 @@
     padding: 10px;
     display: none;
 }
+
+@media screen and (max-width: 600px) {
+    .logo-header {
+        display: none;
+    }
+
+    .header {
+        & h1 {
+            font-size: 24px;
+        }
+    }
+
+    .container {
+        & h4 {
+            font-size: 16px;
+        }
+
+        .submit-request {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .footer {
+        height: 80vh;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        height: 100%;
+
+        & div {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        & .ouvidoria {
+            justify-content: start;
+        }
+    }
+}
