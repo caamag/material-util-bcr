@@ -8,124 +8,19 @@
 
 <body>
 
-    <span class="purchase-location-span">Onde a compra foi feita?</span>
-    <select id="purchase-location">
-        <option selected>-</option>
-        <option value="site_oficial_da_lacoste">Site oficial Lacoste</option>
-        <option value="marketplace">Marketplace</option>
-        <option value="boutique_lacoste">Boutique Lacoste</option>
-        <option value="multimarca">Multimarca</option>
-    </select>
+    <h2 style="font-size:20px;color:black">Seu problema foi resolvido?</h2>
+    <div style="display: flex;">
+        <a href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29035139635219&tf_subject=Pesquisa%20de%20Csat&tf_description=Pesquisa%20de%20Csat&tf_anonymous_requester_email={{ticket.requester.email}}&tf_29035220664979={{ticket.id}}"
+            style="margin-left:10px;margin-right:10px;text-decoration:none;color:white;background-color:green;padding:10px;">
+            Sim
+        </a>
 
-    <!--MULTIMARCA-->
-    <span class="brands-span" style="display: none;">Qual multimarca?</span>
-    <input type="text" id="brands" style="display: none;" placeholder="Multimarca:">
-
-    <!--MARKETPLACE-->
-    <span class="marketplace-shop-span" style="display: none;">Qual a loja?</span>
-    <select id="marketplace-shop" style="display: none;">
-        <option selected>-</option>
-        <option value="netshoes">Netshoes</option>
-        <option value="mercado_livre">Mercado livre</option>
-        <option value="dafiti">Dafiti</option>
-    </select>
-
-    <!--SITE LACOSTE-->
-    <span class="receiveMethod-span" style="display: none;">Forma de recebimento</span>
-    <select id="receiveMethod" style="display: none;">
-        <option selected>-</option>
-        <option value="optei_por_receber_em_um_endereço_residencial_">Optei por receber em um endereço residencial
-        </option>
-        <option value="optei_por_retirar_na_loja">Optei por retirar na loja</option>
-    </select>
-
-    <span class="paymentMethod-span" style="display: none;">Qual foi a forma de pagamento</span>
-    <select id="paymentMethod" style="display: none;">
-        <option selected>-</option>
-        <option value="cartão_de_crédito">Cartão de crédito</option>
-        <option value="pix">Pix</option>
-        <option value="mercado_pago">Mercado pago</option>
-    </select>
-
-    <span class="who-make-purchase-span">A compra foi feita por você?</span>
-    <select id="who-make-purchase">
-        <option selected>-</option>
-        <option value="sim__fui_eu_que_fiz_a_compra_">Sim, fui eu que fiz a compra</option>
-        <option value="não__eu_ganhei_de_presente_">Não, ganhei de presente</option>
-        <option value="não__mas_sou_parente_de_quem_fez_a_compra">Não, mas sou parente de quem fez a compra</option>
-    </select>
-
-    <span class="purchase-number-span" style="display: none;">Número do pedido</span>
-    <input type="text" id="purchase-number" placeholder="Inserir o número do pedido:" style="display: none;">
-
-    <span class="purchaseDetails-span" style="display: none;">Detalhamento do pedido</span>
-    <select id="purchaseDetails" style="display: none;">
-        <option selected>-</option>
-        <option value="meu_pedido_está_atrasado">Meu pedido está atrasado</option>
-        <option value="quero_cancelar_meu_pedido">Quero cancelar meu pedido</option>
-        <option value="quero_devolver_meu_pedido">Quero devolver meu pedido</option>
-        <option value="meu_pedido_consta_como_entregue_mas_não_recebi">Meu pedido conta como entregue mas não recebi
-        </option>
-        <option value="status_do_pedido">Status do pedido</option>
-        <option value="meu_pedido_chegou_incompleto">Meu pedido chegou incompleto</option>
-        <option value="devolvi_meu_pedido_e_não_recebi_o_estorno">Devolvi meu pedido e não recebi o estorno</option>
-        <option value="meu_pedido_está_com_defeito">Meu pedido está com defeito</option>
-        <option value="informações_sobre_clique_e_retire">Informações sobre clique e retire</option>
-        <option value="outros">Outros</option>
-    </select>
-
-    <span class="reasonDevolution-span" style="display: none;">Qual o motivo da devolução</span>
-    <select id="reasonDevolution" style="display: none;">
-        <option selected>-</option>
-        <option value="escolhi_a_forma_de_pagamento_incorreta">Escolhi a forma de pagamento incorreta</option>
-        <option value="o_pedido_está_muito_atrasado">O pedido está muito atrasado</option>
-        <option value="quero_escolher_outra_peça">Quero escolher outra peça</option>
-    </select>
-
-    <span class="purchaseItem-span" style="display: none;">Qual item você se refere?</span>
-    <select id="purchaseItem" style="display: none;">
-        <option selected>-</option>
-        <option value="vestuário">Vestuário</option>
-        <option value="calçado">Calçado</option>
-        <option value="acessório">Acessório</option>
-    </select>
-
-    <span class="productDefect-span" style="display: none;">Qual defeito foi encontrado?</span>
-    <select id="productDefect" style="display: none;">
-        <option selected>-</option>
-        <option value="defeito_encolhimento_da_peça">Encolhimento da peça</option>
-        <option value="defeito_furo_na_peça">Furo na peça</option>
-        <option value="defeito_a_cor_mudou_após_a_lavagem">A cor mudou após a lavagem</option>
-        <option value="defeito_costura_irregular">Costura irregular</option>
-    </select>
-
-    <span class="calcado-span" style="display: none;">Qual defeito foi encontrado?</span>
-    <select id="calcado" style="display: none;">
-        <option selected>-</option>
-        <option value="defeito_a_cor_ficou_manchado">A cor ficou manchado</option>
-        <option value="defeito_sola_descolada">Sola descolada</option>
-        <option value="defeito_rasgo_no_tecido">Rasgo no tecido</option>
-        <option value="defeito_adesivos">Adesivo</option>
-        <option value="defeito_calçado_outo">Outros</option>
-    </select>
-
-    <span class="acessorio-span" style="display: none;">Qual defeito foi encontrado?</span>
-    <select id="acessorio" style="display: none;">
-        <option selected>-</option>
-        <option value="defeito_rasgo_no_couro">Rasgo no couro</option>
-        <option value="defeito_acessorios_costura_irregular">Costura irregular</option>
-        <option value="defeito_alteração_de_cor_no_crocodilo">Alteração de cor no crocodilo</option>
-        <option value="outro_defeito_acessorios">Outro</option>
-    </select>
-
-    <span class="EANs-text-span" style="display: none;">Quais são os EANs das peças que você quer devolver ou já
-        devolveu?</span>
-    <input type="text" placeholder="-" id="EANs-text" style="display: none;">
-
-
-    <div class="csat-popup">
-        <p>Por gentileza responda todas as perguntas</p>
+        <a href="https://lacostebrazil.zendesk.com/hc/pt-br/requests/new?ticket_form_id=29763329852179&tf_subject=naoresolvido&tf_description=nao%20resolvido&tf_29035220664979={{ticket.id}}"
+            style="margin-left:10px;margin-right:10px;text-decoration:none;color:white;background-color:rgb(197, 56, 24);padding:10px;">
+            Não
+        </a>
     </div>
+
 </body>
 
 </html>
