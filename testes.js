@@ -9,3 +9,8 @@ async function verifyTicket() {
 }
 
 verifyTicket()
+
+if (window.location.href.startsWith('https://solicita.rivierasl.com.br/hc/pt-br/sections/25097556667547')) {
+    const main = document.querySelector('[role="main"]')
+    main.classList.add("section-main")
+}
