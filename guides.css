@@ -59,3 +59,15 @@
 .section-main {
     background-color: white !important;
 }
+
+@keyframes fadeInPopCSAT {
+    0% {
+        top: 50px;
+        opacity: 0;
+    }
+
+    100% {
+        top: 100px;
+        opacity: 1;
+    }
+}
