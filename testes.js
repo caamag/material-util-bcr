@@ -1,16 +1,9 @@
-
-async function verifyTicket() {
-    const res = await fetch('/api/v2/tickets/322');
-    const data = await res.json();
-
-    const ticket = data.ticket;
-    const customField = ticket.custom_fields.filter(field => field.id === 30589305035795);
-    console.log(customField);
+const deleteItem = (url, element) => {
+    const currentUrl = window.location.href
+    if (currentUrl !== url) {
+        element.style.display = 'none'
+    }
 }
 
-verifyTicket()
-
-if (window.location.href.startsWith('https://solicita.rivierasl.com.br/hc/pt-br/sections/25097556667547')) {
-    const main = document.querySelector('[role="main"]')
-    main.classList.add("section-main")
-}
+const iconHeader = document.querySelector('.logo-header')
+deleteItem('https://solicita.rivierasl.com.br/hc/pt-br', iconHeader)
