@@ -1,25 +1,14 @@
+//csat
+async function getCSATForms() {
+    const res = await fetch('/api/v2/ticket_forms');
+    const data = await res.json()
 
-async function verifyTicket() {
-    const res = await fetch('/api/v2/tickets/322');
-    const data = await res.json();
+    const regexCSAT = /CSAT/
+    const regexNPS = /NPS/
 
-    const ticket = data.ticket;
-    const customField = ticket.custom_fields.filter(field => field.id === 30589305035795);
-    console.log(customField);
-}
+    const csatForms = data.ticket_forms.filter(form => regexCSAT.test(form.name) || regexNPS.test(form.name));
+    const baseURL = 'ticket_form_id='
+    const urls = csatForms.map(form => `${baseURL}${form.id}`)
 
-verifyTicket()
-
-if (window.location.href.startsWith('https://solicita.rivierasl.com.br/hc/pt-br/sections/25097556667547')) {
-    const main = document.querySelector('[role="main"]')
-    main.classList.add("section-main")
-}
-
-function redirectToHomePage () {
-    window.location.replace('https://solicita.rivierasl.com.br/hc/pt-br');
-}
-
-const regexUrl = /^https:\/\/solicita\.rivierasl\.com\.br\/hc\/pt-br\/requests\/\d+$/;
-if (regexUrl.test(window.location.href)) {
-    redirectToHomePage()
+    return urls.some(url => window.location.href.includes(url))
 }
