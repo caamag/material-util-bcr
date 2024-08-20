@@ -14,3 +14,12 @@ if (window.location.href.startsWith('https://solicita.rivierasl.com.br/hc/pt-br/
     const main = document.querySelector('[role="main"]')
     main.classList.add("section-main")
 }
+
+function redirectToHomePage () {
+    window.location.replace('https://solicita.rivierasl.com.br/hc/pt-br');
+}
+
+const regexUrl = /^https:\/\/solicita\.rivierasl\.com\.br\/hc\/pt-br\/requests\/\d+$/;
+if (regexUrl.test(window.location.href)) {
+    redirectToHomePage()
+}
