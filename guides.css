@@ -1,68 +1,124 @@
-.csat-popup {
-    position: absolute;
-    width: 200px;
-    height: 70px;
-    top: 100px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    background-color: white;
-    border-left: 5px solid red;
-    box-shadow: 0px 0px 10px rgb(211, 211, 211);
-    padding: 10px;
+.aluguel {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    & h3 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    & a {
+        color: black;
+    }
+
+    .cards-aluguel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 300px;
+
+        a {
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .img-card {
+            width: 100px;
+            height: 90%;
+            background-color: white;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & img {
+                width: 35px;
+                height: auto;
+                background-color: white;
+                border-radius: 100%;
+            }
+        }
+
+        .card {
+            width: 100%;
+            height: 100px;
+            background-color: rgb(212, 212, 212);
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    }
+}
+
+.residencial,
+.comercial,
+.rural {
+    width: 150px;
+    height: 80px;
+}
+
+.cards-vendas {
+    margin-left: 40px;
+}
+
+.delete {
     display: none;
 }
 
-@media screen and (max-width: 600px) {
-    .logo-header {
+@media screen and (max-width: 920px) {
+    .header-links {
         display: none;
     }
 
-    .header {
-        & h1 {
-            font-size: 24px;
-        }
+    .orange-btn {
+        display: none;
     }
+}
 
-    .container {
-        & h4 {
+.menu-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 920px) {
+    .menu-icon {
+        display: none;
+    }
+}
+
+.menu-mobiel {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & ul {
+        width: 70%;
+        margin: 0 auto;
+        margin: 15px 0px;
+
+        a {
+            text-decoration: none;
+            color: black;
             font-size: 16px;
+            margin: 10px 0px;
         }
 
-        .submit-request {
-            font-size: 16px;
-        }
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .footer {
-        height: 80vh;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        height: 100%;
-
-        & div {
-            width: 50%;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        & .ouvidoria {
-            justify-content: start;
+        a:hover {
+            text-decoration: underline;
         }
     }
-}
-
-.section-main {
-    background-color: white !important;
-}
-
-.oppo-submit-btn {
-    margin-top: 30px;
-    background-color: #3cb757;
-    color: white;
-    border: none;
 }
