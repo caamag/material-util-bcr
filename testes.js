@@ -23,3 +23,80 @@ menuIcon.addEventListener('click', () => {
     menuMobile.style.opacity = `${isClicked ? '1' : '0'}`
 })
 
+
+yesAnswer.addEventListener('change', () => {
+    notAnswer.style.backgroundColor = 'white'
+    notAnswer.style.border = '2px solid rgb(200,200,200)'
+    notAnswer.style.boxShadow = 'none'
+    solvedInput.value = 'csat_sim'
+    console.log(solvedInput.value)
+})
+
+notAnswer.addEventListener('change', () => {
+    yesAnswer.style.backgroundColor = 'white'
+    yesAnswer.style.border = '2px solid rgb(200,200,200)'
+    yesAnswer.style.boxShadow = 'none'
+    solvedInput.value = 'csat_não'
+    console.log(solvedInput.value)
+})
+
+if (solvedInput.value === '') {
+    console.log(solvedInput.value)
+    e.preventDefault()
+    popUp.style.visibility = 'visible'
+    popUp.querySelector("p").innerHTML = 'Nos diga se o problema foi ou não resolvido.'
+    setTimeout(() => {
+        popUp.style.visibility = 'hidden'
+    }, 4000)
+}
+
+const defaultChecks = document.querySelectorAll('input[type="checkbox"]');
+defaultChecks.forEach(check => {
+    if (check.id !== 'yes-answer' && check.id !== 'no-answer') {
+        check.addEventListener('change', () => {
+            const csatValue = `${yesAnswer.checked ? 'csat_sim' : notAnswer.checked ? 'csat_não' : ''}`;
+            solvedInput.value = csatValue
+        })
+    }
+})
+
+const submitBtnOppo = document.querySelector(".oppo-submit-btn")
+submitBtnOppo.addEventListener("click", (e) => {
+    const popUp = document.querySelector(".csat-popup")
+
+    if (solvedInput.value === '' && yesAnswer.checked) {
+        solvedInput.value = 'csat_sim'
+    } else if (solvedInput.value === '' && notAnswer.checked) {
+        solvedInput.value = 'csat_não'
+    } else if (solvedInput.value === '') {
+        console.log(solvedInput.value)
+        e.preventDefault()
+        popUp.style.visibility = 'visible'
+        popUp.querySelector("p").innerHTML = 'Nos diga se o problema foi ou não resolvido.'
+        setTimeout(() => {
+            popUp.style.visibility = 'hidden'
+        }, 4000)
+    }
+
+    const questions = document.querySelectorAll(".iRSmTf");
+    questions.forEach(question => {
+        const title = question.querySelector("label").innerText
+        if (title.includes('Na escala de 1 a 10')) {
+            const npsInput = question.querySelector("input")
+            if (npsInput.value === '') {
+                e.preventDefault()
+                popUp.style.visibility = 'visible'
+                popUp.querySelector("p").innerHTML = 'Nos dê uma nota de 0 a 10 para o atendimento.'
+                setTimeout(() => {
+                    popUp.style.visibility = 'hidden'
+                }, 4000)
+            }
+        }
+    })
+})
+
+
+window.addEventListener('error', () => {
+    console.log('erro');
+
+})
