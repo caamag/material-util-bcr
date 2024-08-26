@@ -94,9 +94,3 @@ submitBtnOppo.addEventListener("click", (e) => {
         }
     })
 })
-
-
-window.addEventListener('error', () => {
-    console.log('erro');
-
-})
