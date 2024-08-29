@@ -94,3 +94,13 @@ submitBtnOppo.addEventListener("click", (e) => {
         }
     })
 })
+
+
+const showLogOutBtn = document.querySelector('.dropdown-toggle')
+const dropDownContent = document.querySelector('.profile-content-dropdown')
+
+let isVisible = false;
+showLogOutBtn.addEventListener('click', () => {
+    isVisible = !isVisible;
+    dropDownContent.style.display = isVisible ? 'block' : 'none'
+})
