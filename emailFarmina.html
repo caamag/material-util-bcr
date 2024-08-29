@@ -8,14 +8,15 @@
 
 <body style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <div style="width: 525pt; margin: auto">
-        <header>
+        <header style="background-color: #005EA8;">
             <div style=padding:0;>
-                <div style="text-align:center; background-color:#005EA8;">
+                <div style="text-align:center;">
                     <p
                         style="padding:18.75pt 0 11.25pt 0; font-size:12pt;font-family:Aptos,sans-serif;text-align:center;margin:0;">
                         <span style="color: #000 !important;" data-ogsc=black><img data-imagetype=External
                                 id=x_x_x__x0000_i1031 src=https://www.farmina.com/images/email-2022/logo-Farmina.png
                                 style=width:78.59pt;height:65.99pt;></span>
+                    </p>
                 </div>
                 <div style="text-align:center; background-size:cover;">
                     <p style="padding:0; font-size:12pt;font-family:Aptos,sans-serif;text-align:center;margin:0;">
@@ -24,32 +25,33 @@
         </header>
         <main>
             <div style=text-align:left;>
-                <div
-                    style="padding:15pt 11pt 7pt 11pt; font-size:10pt;font-family:Aptos,sans-serif;text-align:left;margin:0;line-height:15.0pt;">
-                    <label data-ogsc="rgb(18, 18, 18)" style="color: #000 !important; letter-spacing: -0.15pt;">A ticket
-                        was created on your behalf. You can reply directly to this e-mail.</label>
-                </div>
                 <div style=text-align:center;>
                     <p
-                        style="padding:7.5pt 11.25pt; font-size:12pt;font-family:Aptos,sans-serif;text-align:left;margin:0 0;">
+                        style="padding:7.5pt 11.25pt; font-size:12pt;font-family:Aptos,sans-serif;text-align:center;margin:0 0;">
                         <b><span style="color: #005EA8 !important; font-size: 14pt; letter-spacing: -0.15pt;"
+                                data-ogsc=#005EA8>Your Opinion Matters.</span></b><span ,data-ogsc="rgb(18, 18, 18)"
+                            style="color: #000 !important; letter-spacing: -0.15pt;"></span>
+                    </p>
+                    <p
+                        style="padding:7.5pt 11.25pt; font-size:12pt;font-family:Aptos,sans-serif;text-align:center;margin:0 0;">
+                        <b><span style="color: #005EA8 !important; font-size:14pt; letter-spacing: -0.15pt;"
                                 data-ogsc=#005EA8>Dear {{ ticket.requester.name }},</span></b><span
                             ,data-ogsc="rgb(18, 18, 18)"
                             style="color: #000 !important; letter-spacing: -0.15pt;"></span>
+                    </p>
                 </div>
                 <div style=text-align:center;>
                     <div style=text-align:center;>
                         <div
                             style="padding:15pt 11pt 7pt 11pt; font-size:12pt;font-family:Aptos,sans-serif;text-align:left;margin:0;line-height:15.0pt;">
-                            <label data-ogsc="rgb(18, 18, 18)"
-                                style="text-align: center!important;color: #000 !important; letter-spacing: -0.15pt;">
-                                {{ticket.latest_public_comment_html }}</label><br><br>
+                            {{dc.gat_farmina}}<br><br>{{satisfaction.rating_section}}<br><br>
                             <div style="text-align: left; justify-content: center; align-items: center">
                                 <p
                                     style="padding:0pt 0pt; font-size:12pt;font-family:Aptos,sans-serif;text-align:left;margin:0 0;line-height:15.0pt;">
                                     <span data-ogsc="rgb(18, 18, 18)"
-                                        style="color: #000 !important; letter-spacing: -0.15pt;">Regards,<br
-                                            aria-hidden=true>The Farmina Team.</span>
+                                        style="color: #000 !important; letter-spacing: -0.15pt;">Your insights are
+                                        invaluable to us, and we greatly appreciate your time.<br aria-hidden=true>Thank
+                                        you for being a part of the Farmina family!</span>
                             </div>
                         </div>
                     </div>
@@ -125,6 +127,5 @@
             </div>
         </footer>
     </div>
-</body>
 
 </html>
