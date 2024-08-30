@@ -94,13 +94,3 @@ submitBtnOppo.addEventListener("click", (e) => {
         }
     })
 })
-
-
-const toggleBtn = document.querySelector(".dropdown-toggle");
-const profileContent = document.querySelector('.profile-content-dropdown');
-
-let isVisible = false;
-toggleBtn.addEventListener('click', () => {
-    isVisible = !isVisible;
-    profileContent.style.display = isVisible ? 'block' : 'none';
-})
