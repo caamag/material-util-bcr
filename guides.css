@@ -176,3 +176,23 @@
         }
     }
 }
+
+.select-form-btn-first {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    border-radius: 0px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.invisible-links {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.visible-links {
+    visibility: visible;
+    opacity: 1;
+}
