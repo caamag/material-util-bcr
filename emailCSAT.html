@@ -15,6 +15,27 @@
             style="margin-left:10px;margin-right:10px;text-decoration:none;color:white;background-color:rgb(197, 56, 24);padding:10px;">No</a>
     </div>
 
+    <ul class="login">
+
+        {{#unless signed_in}}
+        <li class="li_one">
+
+            <a href="/requests/new" class="a_enviar"> Enviar uma solicitação </a>
+        </li>
+        <li>
+
+            {{#link "sign_in" class="sign-in"}}
+
+            {{t 'sign_in'}}
+
+            {{/link}}
+
+        </li>
+
+        {{/unless}}
+
+    </ul>
+
 </body>
 
 </html>
