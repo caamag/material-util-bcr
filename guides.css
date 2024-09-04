@@ -196,3 +196,29 @@
     visibility: visible;
     opacity: 1;
 }
+
+.show-links-btn {
+    width: 100%;
+    height: 35px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: left;
+    transition: 150ms;
+}
+
+.link-container {
+    width: 100%;
+    height: 35px;
+    background-color: white;
+    border-radius: 0px;
+    padding: 5px;
+    display: none;
+}
+
+.link-form {
+    color: black !important;
+    text-decoration: none !important;
+    transition: 150ms !important;
+    border-radius: 0px;
+}

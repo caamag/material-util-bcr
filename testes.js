@@ -96,11 +96,65 @@ submitBtnOppo.addEventListener("click", (e) => {
 })
 
 
-const showLogOutBtn = document.querySelector('.dropdown-toggle')
-const dropDownContent = document.querySelector('.profile-content-dropdown')
+const getCSATNPSForms = async () => {
+    const res = await fetch('/api/v2/ticket_forms');
+    const data = await res.json();
 
-let isVisible = false;
-showLogOutBtn.addEventListener('click', () => {
-    isVisible = !isVisible;
-    dropDownContent.style.display = isVisible ? 'block' : 'none'
-})
+    const regexCSAT = /CSAT/
+    const regexNPS = /NPS/
+
+    const forms = data.ticket_forms.filter(form => !regexCSAT.test(form.name) &&
+        !regexNPS.test(form.name) && form.end_user_visible === true && form.active === true && form.restricted_brand_ids[0] === 16092059503380
+    )
+}
+
+const getCustomerForms = async () => {
+    const res = await fetch('/api/v2/ticket_forms');
+    const data = await res.json();
+
+    const regexCSAT = /CSAT/
+    const regexNPS = /NPS/
+
+    const forms = data.ticket_forms.filter(
+        form => !regexCSAT.test(form.name) &&
+        !regexNPS.test(form.name) && 
+        form.end_user_visible === true && 
+        form.active === true && 
+        form.restricted_brand_ids[0] === 16092059503380
+    )
+
+    const requestFormId = document.querySelector(".request_ticket_form_id");
+    forms.map(form => {
+        let content = `
+            <div class="link-container">
+                <a href="https://niky8517.zendesk.com/hc/pt-br/requests/new?ticket_form_id=${form.id}" class="link-form">${form.display_name}</a>
+            </div>
+        `;
+        requestFormId.insertAdjacentHTML('afterend', content);
+    })
+
+    const selecFormBtn = document.createElement('button');
+    selecFormBtn.innerHTML = '-'
+    selecFormBtn.classList.add('show-links-btn')
+
+    let isVisible = false;
+    selecFormBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        isVisible = !isVisible;
+
+        const links = document.querySelectorAll('.link-container').forEach(link => {
+            link.style.display = isVisible ? 'block' : 'none'
+        })
+    })
+
+    requestFormId.appendChild(selecFormBtn)
+}
+
+getCSATNPSForms()
+    .then(csatForm => {
+        if (!csatForm) {
+            const nestyInput = document.querySelector('.nesty-input').style.display = 'none';
+
+            getCustomerForms()
+        }
+    })
