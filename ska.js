@@ -1,6 +1,6 @@
 let time = 4000;
 let currentImage = 0;
-const images = document.querySelectorAll('.banner-container img');
+const images = document.querySelectorAll('.banner-container a');
 let max = images.length;
 
 const nextImage = () => {
@@ -27,15 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let shoCategories = false;
 const showMoreBtn = document.querySelector('.show-more-btn');
-const allCategories = document.querySelectorAll('.categories-container a');
+const allCategories = document.querySelectorAll('.categorie-card');
 showMoreBtn.addEventListener('click', () => {
     shoCategories = !shoCategories;
 
     allCategories.forEach((categorie, index) => {
         if (index > 7 && !shoCategories) {
-            categorie.style.visibility = 'hidden'
+            categorie.style.opacity = '0'
+            categorie.style.height = '0px'
         } else {
-            categorie.style.visibility = 'visible'
+            categorie.style.opacity = '1'
+            categorie.style.height = '120px'
         }
     })
 
@@ -44,8 +46,10 @@ showMoreBtn.addEventListener('click', () => {
 
 allCategories.forEach((categorie, index) => {
     if (index > 7) {
-        categorie.style.visibility = 'hidden'
+        categorie.style.opacity = '0'
+        categorie.style.height = '0px'
     } else {
-        categorie.style.visibility = 'visible'
+        categorie.style.opacity = '1'
+        categorie.style.height = '120px'
     }
 })
