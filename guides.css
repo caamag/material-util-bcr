@@ -69,3 +69,87 @@
         height: 100%;
     }
 }
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+
+    & h2 {
+        color: white;
+        font-weight: 300;
+    }
+
+    & span {
+        color: #048dcc;
+        font-size: 30px;
+    }
+}
+
+.redes-container {
+    display: flex;
+
+    & img {
+        width: 50px;
+        height: auto;
+    }
+}
+
+.logo-footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 120px;
+        height: auto;
+    }
+}
+
+.recent-title {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.frequently-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: white;
+    margin-bottom: 50px;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    & h3 {
+        font-weight: bold;
+    }
+
+    & .frequently-card {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        background-color: white;
+        box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.2);
+        transition: 150ms;
+        padding: 15px;
+    }
+
+    & .frequently-card:hover {
+        scale: 1.05;
+    }
+
+    & a {
+        color: #05588c;
+    }
+}
+
+.blue-detail {
+    position: absolute;
+    width: 5px;
+    height: 25px;
+    background-color: #05588c;
+    left: -10px;
+    top: 20px;
+}
