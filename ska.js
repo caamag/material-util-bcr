@@ -35,9 +35,11 @@ showMoreBtn.addEventListener('click', () => {
         if (index > 7 && !shoCategories) {
             categorie.style.opacity = '0'
             categorie.style.height = '0px'
+            categorie.style.diplay = 'none'
         } else {
             categorie.style.opacity = '1'
             categorie.style.height = '120px'
+            categorie.style.diplay = 'flex'
         }
     })
 
@@ -52,4 +54,14 @@ allCategories.forEach((categorie, index) => {
         categorie.style.opacity = '1'
         categorie.style.height = '120px'
     }
+})
+
+//verify if is end user
+const isAdmin = (role) => {
+    console.log(role);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const role = window.HelpCenter.user.role;
+    isAdmin(role)
 })
