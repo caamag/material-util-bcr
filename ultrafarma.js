@@ -47,6 +47,10 @@ const verifyTicketExist = (url) => {
                 .querySelector("input")
                 .value;
 
+            const popUpWarning = document.querySelector('.pop-up-warning');
+            const warningtext = document.querySelector('.pop-up-warning')
+                .querySelector('p');
+
             const requiredFields = document.querySelectorAll('.required');
             for (const field of requiredFields) {
                 const requiredInput = field.querySelector('input');
@@ -56,6 +60,13 @@ const verifyTicketExist = (url) => {
                 }
 
                 if (requiredInput && requiredInput.value === '') {
+                    popUpWarning.style.display = 'flex';
+                    warningtext.innerHTML = 'Preencher todos os campos obrigatórios.'
+
+                    setTimeout(() => {
+                        popUpWarning.style.display = 'none';
+                    }, 4000)
+
                     alert('Preencher todos os campos obrigatórios.');
                     console.log('Campo vazio:', requiredInput);
                     return;
@@ -66,7 +77,12 @@ const verifyTicketExist = (url) => {
             if (ticket.ticket) {
                 e.target.form.submit();
             } else {
-                alert('Ticket não localizado. Verifique o ID.');
+                popUpWarning.style.display = 'flex';
+                warningtext.innerHTML = 'Ticket não localizado. Verificar o ID.'
+
+                setTimeout(() => {
+                    popUpWarning.style.display = 'none';
+                }, 4000)
             }
         })
 
@@ -75,7 +91,6 @@ const verifyTicketExist = (url) => {
 
 verifyTicketExist(window.location.href);
 
-//request_custom_fields_29064349543451
 if (window.location.href.includes('new?ticket_form_id=28841186648475')) {
     const description = document.querySelector('#request_description')
     const relato = document.querySelector('.request_custom_fields_29064349543451').style.display = 'none'
@@ -147,3 +162,9 @@ const setMessagesAlert = (url) => {
 }
 
 setMessagesAlert(window.location.href);
+
+
+/*
+    - Redirecionar para a home no caso de não seguir com a troca;
+    - Tentar ver popUp que esconderá o assunto e demais campos no caso especificado;
+*/
