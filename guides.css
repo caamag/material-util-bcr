@@ -195,3 +195,33 @@
 .article-body img {
     border: #05588c solid 1px;
 }
+
+.form-title {
+    margin-top: 150px;
+}
+
+
+.pop-up-warning {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 100px;
+    margin: auto;
+
+    width: 300px;
+    height: 80px;
+    display: none;
+    align-items: center;
+    padding: 10px 20px;
+    border-left: #f7c55b 3px solid;
+    background-color: white;
+    z-index: 5;
+    box-shadow: 0px 0px 0px 5px 10px rgb(205, 205, 205);
+}
+
+.alert-message {
+    background-color: rgb(255, 255, 204);
+    border: solid 1px rgb(253, 253, 133);
+    font-size: 14px;
+    padding: 10px;
+}
