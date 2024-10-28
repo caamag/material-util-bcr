@@ -2,7 +2,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'fs';
 
-const baseUrl = 'https://con-bcrcx-caio.zendesk.com/api/v2/guide/theming/jobs/themes/imports'; 
+const baseUrl = 'https://con-bcrcx-caio.zendesk.com/api/v2/guide/theming/jobs/themes/imports';
 const credentials = btoa(`caio.lopes@bcrcx.com/token:d1kSny145GQsPaTd6AaoFTOjWQC7fzVPTv20rD4F`);
 const brandID = '17919875784987';
 const filePath = './template-pandora.zip';
@@ -12,11 +12,11 @@ const postNewTheme = async () => {
         const response = await axios.post(baseUrl, {
             job: {
                 attributes: {
-                brand_id: brandID,
-                format: 'zip',
+                    brand_id: brandID,
+                    format: 'zip',
                 },
             },
-            }, {
+        }, {
             headers: {
                 'Authorization': `Basic ${credentials}`,
                 'Content-Type': 'application/json',
